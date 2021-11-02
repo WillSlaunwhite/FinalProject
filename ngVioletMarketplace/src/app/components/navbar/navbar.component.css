@@ -1,7 +1,8 @@
- .navbar {
+.navbar {
   background-color: rgb(114, 0, 104) !important;
    margin-inline: 15px;
    padding-right: 5px;
+   white-space: nowrap;
  }
  .btn-primary {
   color: rgb(255, 255, 255) !important;
@@ -12,6 +13,7 @@
 
  .navbar .form-inline {
   display: inline-block;
+
 }
 
 .navbar .navbar-brand {
@@ -23,6 +25,12 @@
 .nav-item {
   padding-inline: 20px !important;
 }
+.navbar .btn-primary:hover, .navbar .btn-primary:focus {
+
+  background: #fff !important;
+}
+
+
 
  /* .navbar-custom {
 	background-color: rgb(114, 0, 104);

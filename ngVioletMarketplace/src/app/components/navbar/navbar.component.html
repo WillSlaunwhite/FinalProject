@@ -50,21 +50,26 @@
       <a class="navbar-brand" href="#">Hidden brand</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <button class="btn-primary"><a class="nav-link" [routerLink]="['/home']">Home</a></button>
+          <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
         </li>
         <li class="nav-item">
           <button class="btn-primary"><a class="nav-link" [routerLink]="['/register']">Register</a></button>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
+          <button class="btn-primary"><a class="nav-link" [routerLink]="['/login']">Login</a></button>
+          <!-- <a class="nav-link" [routerLink]="['/login']">Login</a> -->
         </li>
-        <li class="nav-item" style="">
-          <a class="nav-link" [routerLink]="['/token']">New NFT</a>
+        <li class="nav-item" style="" >
+          <button class="btn-primary"><a class="nav-link" [routerLink]="['/token']">New NFT</a></button>
+          <!-- <a class="nav-link" [routerLink]="['/token']">New NFT</a> -->
         <li class="nav-item">
-          <a class="nav-link" data-target="#myModal" (click)="openModalWithComponent()" [routerLink]="['/test']"> TEST LINK</a>
+          <button class="btn-primary"><a class="nav-link" [routerLink]="['/Home']">Test Button</a></button>
+          <!-- <a class="nav-link" data-target="#myModal" (click)="openModalWithComponent()" [routerLink]="['/test']"> TEST LINK</a> -->
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-target="#myModal" (click)="openModalWithComponent()"> TEST LINK 2</a>
+          <button class="btn-primary"><a class="nav-link" [routerLink]="['/Home']">Test Button2</a></button>
+          <!-- <a class="nav-link" data-target="#myModal" (click)="openModalWithComponent()"> TEST LINK 2</a> -->
         </li>
       </ul>
 
