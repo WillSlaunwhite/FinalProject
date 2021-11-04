@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   getTokens(): void {
-    this.tokenService.index().subscribe(
+    this.tokenService.getAllTokens().subscribe(
       tokenList => {
         console.log(tokenList.length);
 

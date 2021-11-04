@@ -36,11 +36,12 @@ export class AuthService {
       })
     );
   }
+
   getUser(username: string): Observable<User> {
     return this.http.get<User>(`${this.url}/${username}`).pipe(
       catchError((err: any) => {
         console.error(err);
-        return throwError('tokenService.getUser(): Error retreiving user');
+        return throwError('auth.getUser(): Error retreiving user');
       })
     );
   }

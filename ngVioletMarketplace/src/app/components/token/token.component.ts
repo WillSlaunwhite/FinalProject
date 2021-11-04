@@ -22,16 +22,13 @@ export class TokenComponent implements OnInit {
     private tokenService: TokenService,
     private transactionService: TransactionService,
     private auth: AuthService
-  ) { }
+  ) {}
   newToken: Token = new Token();
   tokens: Token[] = [];
   selected: Token | null = null;
   editToken: Token | null = null;
   tokenTransactions: Tokentx[] = [];
   bids: Bid[] = [];
-
-
-
 
   createToken(token: Token) {
     this.tokenService.create(token).subscribe(
@@ -43,27 +40,26 @@ export class TokenComponent implements OnInit {
         console.error('TokenComponent.createToken(): Error creating Token');
         console.error(failed);
       }
-      );
-    }
+    );
+  }
 
-    deleteToken(id: number): void {
-      this.tokenService.destroy(id).subscribe(
-        (success) => {
-          this.getAllTokens();
-        },
-        (failure) => {
-          console.error('tokenComponent.deleteToken(): error deleting Token');
-          console.error(failure);
-        }
-      );
-    }
+  deleteToken(id: number): void {
+    this.tokenService.destroy(id).subscribe(
+      (success) => {
+        this.getAllTokens();
+      },
+      (failure) => {
+        console.error('tokenComponent.deleteToken(): error deleting Token');
+        console.error(failure);
+      }
+    );
+  }
 
-    // updateToken
-    // method already exists in service, needs to be built out here
-
+  // updateToken
+  // method already exists in service, needs to be built out here
 
   getAllTokens(): void {
-    this.tokenService.index().subscribe(
+    this.tokenService.getAllTokens().subscribe(
       (tokenList) => {
         this.tokens = tokenList;
       },
@@ -76,68 +72,100 @@ export class TokenComponent implements OnInit {
     );
   }
 
+  // getAllTransfers() {
+  //   this.transactionService.getAllTransfers().subscribe(
+  //     (tokentxList) => {
+  //       console.log(this.tokenTransactions.length);
 
-  getAllTransfers() {
-    this.transactionService.getAllTransfers().subscribe(
-      tokentxList => {
-        console.log(this.tokenTransactions.length);
+  //       this.tokenTransactions = tokentxList;
 
-        this.tokenTransactions = tokentxList;
+  //       console.log(this.tokenTransactions.length);
+  //     },
+  //     (fail) => {
+  //       console.error(
+  //         'tokenComponent.getAllTransfers(): error getting transfers'
+  //       );
+  //       console.error(fail);
+  //     }
+  //   );
+  // }
 
-        console.log(this.tokenTransactions.length);
-      },
-      fail => {
-        console.error('tokenComponent.getAllTransfers(): error getting transfers');
-        console.error(fail);
-      }
-    )
+  getBidsForSelectedToken() {
+    if (this.selected) {
+      this.transactionService.getAllTokenBids(this.selected.id).subscribe(
+        (bidsList) => {
+          console.log(this.bids.length);
+
+          this.bids = bidsList;
+
+          console.log(this.bids.length);
+        },
+        (fail) => {
+          console.error(
+            'tokenComponent.getAllTransfers(): error getting transfers'
+          );
+          console.error(fail);
+        }
+      );
+    }
   }
 
-  getMyBids() {
-    this.transactionService.getAllBids().subscribe(
-      bidsList => {
-        console.log(this.bids.length);
+  // on init, add these fields
 
-        this.bids = bidsList;
+  // do I need to do anything for the owner? maybe buyer/seller?
+  // would the buyer/seller stuff be handled somewhere else, maybe on
+  // the bid page specifically.
 
-        console.log(this.bids.length);
-      },
-      fail => {
-        console.error('tokenComponent.getAllTransfers(): error getting transfers');
-        console.error(fail);
-      }
-    );
-  }
-
+  // if show, specifically. Think we just need to fill selected
+  // this.transactionService.getAllTokenBids(this.selected.id);
 
   ngOnInit(): void {
-    if (!this.selected && this.route.snapshot.paramMap.get('id')) {
+    // originally also had !this.selected && on 115 idk if I need it
+    if (this.route.snapshot.paramMap.get('id')) {
       this.tokenService.show(this.route.snapshot.params['id']).subscribe(
         (success) => {
           this.selected = success;
-          console.log("succeeded getting token, attempting to get transfers.");
 
-          this.getAllTransfers();
+          console.log('succeeded getting token, attempting to get transfers.');
 
-          console.log("succeeded getting transfers, attempting to get all bids");
 
-          this.getMyBids();
 
-          console.log("successfully retrieved all bids");
+          // subscribe to assign selected its transfers
+
+          // I think we would only need to see bids on this page, right?
+          // no need to pull bids for another reason than to see them on a specific
+          // token, so we don't need to even populate bids if we don't route to show.
+
+          this.transactionService.getAllTokenBids(this.selected.id).subscribe(
+            retrievedTokenBids => {
+              this.bids = retrievedTokenBids;
+            },
+            failedToRetrieveBids => {
+              console.error('userPageComponent.ngOnInit(): failed to retrieve list of Token bids using transactionService.getAllTokenBids()');
+              console.error(failedToRetrieveBids);
+            }
+          );
+
+          console.log(
+            'succeeded getting transfers, attempting to get all bids'
+          );
+
+          console.log('successfully retrieved all bids');
         },
         (fail) => {
-          console.error('tokenComponent.ngOnInit(): error initializing Token by id');
+          console.error(
+            'tokenComponent.ngOnInit(): error initializing Token by id'
+          );
           console.error('routing to index');
 
-          this.tokenService.index();
+          this.tokenService.getAllTokens();
 
           console.error('Succeeded routing to index, getting transfers');
 
-          this.getAllTransfers();
+          this.transactionService.getAllTransfers();
           console.log(this.tokenTransactions.length);
 
           console.error('succeded getting transfers');
-
 
           console.error(fail);
         }
@@ -162,5 +190,4 @@ export class TokenComponent implements OnInit {
   loggedIn() {
     return this.auth.isUserLoggedIn();
   }
-
 }

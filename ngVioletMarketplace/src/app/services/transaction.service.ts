@@ -52,10 +52,6 @@ create(bid: Bid): Observable<Bid> {
   );
 }
 
-
-
-
-
 // logic to set users and tokens and transactions
 
 
@@ -64,13 +60,13 @@ create(bid: Bid): Observable<Bid> {
 
 
 
-
+  ///////  START TRANSFER METHODS ///////
 
 
   // search for transfers by buyer seller and then all user transactions
 
   getAllTransfers(): Observable<Tokentx[]> {
-    return this.http.get<Tokentx[]>(this.url + 'transfers/1', this.auth.getHttpOptions()).pipe(
+    return this.http.get<Tokentx[]>(this.url + 'transfers/', this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('transactionService.getAllTransfers(): Error retrieving Token Transaction list');
@@ -96,8 +92,8 @@ create(bid: Bid): Observable<Bid> {
     );
   }
 
-  getAllUserTransfers(): Observable<Tokentx[]> {
-    return this.http.get<Tokentx[]>(this.url + 'transfers/' + this.auth.getUsername()).pipe(
+  getAllUserTransfers(id: number): Observable<Tokentx[]> {
+    return this.http.get<Tokentx[]>(this.url + 'transfers/' + id, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('transactionService.getAllUserTransfers(): Error retrieving Token Transaction list');
@@ -105,37 +101,46 @@ create(bid: Bid): Observable<Bid> {
     );
   }
 
+  // get a token's list of transfers
 
-
-  // ngOnInit(): void {
-    //   if (!this.selected && this.route.snapshot.paramMap.get('id')) {
-    //     this.todoService.show(this.route.snapshot.params['id']).subscribe(
-    //       (success) => {
-    //         this.reloadTodos();
-    //         this.selected = success;
-    //       },
-    //       (fail) => {
-    //         console.error('TodoListComponent.ngOnInit(): error initializing todo by id');
-    //         console.error(fail);
-    //         this.router.navigateByUrl('notfound');
-    //       }
-    //     );
-    //   } else {
-    //     this.reloadTodos();
-    //   }
-    // }
-
-  getAllBids(): Observable<Bid[]> {
-    return this.http.get<Bid[]>(this.url + 'bids/').pipe(
+  getAllTokenTransfers(id: number): Observable<Tokentx[]> {
+    return this.http.get<Tokentx[]>(this.url + 'transfers/token/' + id).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('transactionService.getAllBids(): Error retrieving Bid list');
+        return throwError('transactionService.getAllTokenTransfers(): Error retrieving Token Transaction list');
       })
     );
   }
 
-  getAllBidsUser(): Observable<Bid[]> {
-    return this.http.get<Bid[]>(this.url + 'bids/' + this.route.snapshot.paramMap.get("userId")).pipe(
+
+ ///////  END TRANSFER METHODS ///////
+
+
+ ///////  START BID METHODS ///////
+
+
+// would we ever need to get all bids for everything?
+
+  // getAllBids(): Observable<Bid[]> {
+  //   return this.http.get<Bid[]>(this.url + 'bids/').pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError('transactionService.getAllBids(): Error retrieving Bid list');
+  //     })
+  //   );
+  // }
+
+  getAllUserBids(userId: number): Observable<Bid[]> {
+    return this.http.get<Bid[]>(this.url + 'bids/user/' + userId, this.auth.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('transactionService.getAllBids(): Error retrieving Bid list for authorized user');
+      })
+    );
+  }
+
+  getAllTokenBids(tokenId: number): Observable<Bid[]> {
+    return this.http.get<Bid[]>(this.url + 'bids/' + tokenId).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('transactionService.getAllBids(): Error retrieving Bid list');
