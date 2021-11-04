@@ -37,7 +37,7 @@ export class AuthService {
     );
   }
 
-  getUser(username: string | null): Observable<User> {
+  getUser(username: string| null): Observable<User> {
     return this.http.get<User>(`${this.url}/${username}`).pipe(
       catchError((err: any) => {
         console.error(err);

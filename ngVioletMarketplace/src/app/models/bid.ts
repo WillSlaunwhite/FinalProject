@@ -18,7 +18,7 @@ export class Bid {
     description: string = '',
     offerAmount: number = 0,
     accepted: boolean = false,
-    buyer: User = new User(),
+    buyer: User= new User(),
     seller: User = new User(),
     token: Token= new Token(),
     transaction: Tokentx = new Tokentx(),

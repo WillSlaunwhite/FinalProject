@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.marketplace.entities.Bid;
 import com.skilldistillery.marketplace.entities.Token;
 import com.skilldistillery.marketplace.entities.TokenTx;
+import com.skilldistillery.marketplace.services.TokenService;
 import com.skilldistillery.marketplace.services.TokenTxService;
 import com.skilldistillery.marketplace.services.UserService;
 
@@ -32,6 +33,9 @@ public class TokenTxController {
 	
 	@Autowired
 	private UserService userSvc;
+	
+	@Autowired
+	private TokenService tokenSvc;
 
 	/*
 	 * THIS IS THE TOKEN ** TX ** CONTROLLER. ENSURE YOU MEANT TO BE HERE AND NOT
@@ -118,8 +122,34 @@ public class TokenTxController {
 
 // POST NEW BID
 	@PostMapping("bids")
-	public Bid create(HttpServletRequest req, HttpServletResponse resp, @RequestBody Bid bid) {
-		txSvc.create(bid);
+	public Bid create(HttpServletRequest req, HttpServletResponse resp, @RequestBody Bid bid, Principal principal) {
+		if (bid == null) {
+			resp.setStatus(404);
+			return null;
+		} else {
+		Bid tocreate = bid;
+		System.out.println(bid.getBuyer().getId());
+		
+		tocreate.setSeller(bid.getSeller()); 
+		tocreate.setBidDate(bid.getBidDate());
+		tocreate.setToken(bid.getToken());
+		tocreate.setBuyer(userSvc.getUserByUsername(principal.getName()));
+		tocreate.setOfferAmount(bid.getOfferAmount());
+				
+		txSvc.create(tocreate); 
+		
+		
+		return tocreate;
+		}
+	}
+	
+	@PostMapping("bids/{tokenId}")
+	public Bid create(HttpServletRequest req, HttpServletResponse resp, @RequestBody Bid bid, Principal principal, @PathVariable int tokenId) {
+		bid.setSeller(tokenSvc.showById(tokenId).getOwner());
+		bid.setBuyer(userSvc.getUserByUsername(principal.getName()));
+//		bid.setToken(tokenSvc.showById(tokenId);
+		txSvc.create(bid); 
+		
 		if (bid == null) {
 			resp.setStatus(404);
 		}
