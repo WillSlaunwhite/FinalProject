@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   BsModalService,
@@ -29,8 +29,15 @@ export class UserPageComponent implements OnInit {
     private transSvc: TransactionService,
     private modalService: BsModalService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    modalRef: BsModalRef
   ) {}
+
+  modalRef: BsModalRef= new BsModalRef();
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+ }
+
 
   bsModalRef?: BsModalRef;
   editProfile: boolean = false;
@@ -144,4 +151,6 @@ export class UserPageComponent implements OnInit {
     );
     this.bsModalRef.content.closeBtnName = 'Close';
   }
+
+
 }
