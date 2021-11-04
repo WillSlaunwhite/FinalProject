@@ -42,6 +42,8 @@ export class TransactionService {
 
 // logic to create and update bids and transactions
 
+
+//Need to Fix Spring Controller Method
 create(bid: Bid): Observable<Bid> {
   bid.accepted = false;
   return this.http.post<Bid>(this.url, bid, this.auth.getHttpOptions()).pipe(

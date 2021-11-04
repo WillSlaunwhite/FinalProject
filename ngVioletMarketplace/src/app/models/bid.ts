@@ -16,8 +16,8 @@ export class Bid {
   constructor(
     id: number = 0,
     description: string = '',
-    offerAmount: number,
-    accepted: boolean | false,
+    offerAmount: number = 0,
+    accepted: boolean = false,
     buyer: User= new User(),
     seller: User = new User(),
     token: Token= new Token(),
