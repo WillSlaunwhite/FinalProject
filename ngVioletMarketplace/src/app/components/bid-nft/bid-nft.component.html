@@ -16,12 +16,14 @@
 
         <form action="/action_page.php">
           <label for="offerExp">Date and Time:</label>
-          <input type="datetime-local" id="offerExp" name="offerExp">
+          <input type="datetime-local" id="offerExp" name="offerExp" [(ngModel)]="newBid.bidDate" placeholder=""/>
         </form>
+
+
 
       </div><br>
       <h1 class="card-title">Offer Price:</h1><br>
-      <h1 class="card-title"><input type="number" id="offerPrice" name="offerPrice"placeholder="$69420" size="30"></h1>
+      <h1 class="card-title"><input type="number" id="offerPrice" name="offerPrice"placeholder="$6420" size="30"></h1>
       <br>
       <div class="form-group">
         <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
@@ -31,8 +33,8 @@
 
     <div class="card-footer">
       <div class="text-center my-4">
-        <a href="https://www.linkedin.com/in/caleb-gardner-1972b6211/">
-        <button class="btn btn-danger" style="border-radius: 12px">
+        <a (click)="createBid(newBid)">
+        <button class="btn btn-danger" style="border-radius: 12px" >
         Make Offer
         </button></a>
       </div>

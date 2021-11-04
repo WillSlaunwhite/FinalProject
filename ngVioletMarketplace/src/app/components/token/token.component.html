@@ -8,7 +8,7 @@
         <div class="card h-100 shadow-sm" style="width: 25rem">
 
           <div class="card-header"><img class="imgsize"
-              src="https://live.staticflickr.com/65535/51633352877_8852dea13b_w.jpg"/>
+              src="{{selected.tokenLocation}}"/>
           </div>
           <div>
 
@@ -17,22 +17,40 @@
           <div class="card-body">
 
             <h1>Token Id :</h1>
+            <h1>{{selected.id}}</h1>
             <h2>Token Name :</h2>
-            <h2>Offer Price: </h2>
-
+            <h2>{{selected.name}}</h2>
+            <h2>Current Price: </h2>
+           <h2>${{selected.price}}</h2>
 
             </div><br>
 
-            <div class="form-group">
-              <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
+
+            <!--  -->
+            <div class="card-body">
+              <h1>Offer Expiration</h1>
+              <div>
+
+                <form action="/action_page.php">
+                  <label for="offerExp">Date and Time:</label>
+                  <input type="datetime-local" id="offerExp" name="offerExp" [(ngModel)]="newBid.bidDate" placeholder=""/>
+                </form>
+
+
+
+              </div><br>
+              <h1 class="card-title">Offer Price:</h1><br>
+              <h1 class="card-title"><input type="number" id="offerPrice" name="offerPrice" [(ngModel)]="newBid.offerAmount" placeholder="$6420" size="30"></h1>
+              <br>
+              <div class="form-group">
+                <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
+              </div>
             </div>
-
-
-
-          <div class="card-footer">
+            <!--  -->
+          <div class="card-footer" *ngIf="loggedIn()">
             <div class="text-center my-4">
 
-              <button class="btn btn-primary" style="border-radius: 12px" routerLink='/bid'>
+              <button (click)="createBid(newBid)" class="btn btn-primary" style="border-radius: 12px">
               Bid
               </button>
 
@@ -40,10 +58,25 @@
                Buy
                 </button>
             </div>
+          </div>
+
+            <div class="card-footer" *ngIf="!loggedIn()">
+              <div class="text-center my-4">
+
+                <button class="btn btn-primary" (click)="openModal(login)" style="border-radius: 12px" >
+                Login
+                </button>
+
+                <button class="btn btn-primary" style="border-radius: 12px" (click)="openModal(register)">
+                 Register
+                  </button>
+              </div>
 
           </div>
-        </div>
+
 </div>
+
+
 <!-- //////////////////////////// -->
 <h1>TRANSACTIONS TABLE</h1>
 <table class="table table-bordered table-striped table-hover">
@@ -98,3 +131,12 @@
   </tr>
 </tbody>
 </table>
+
+
+<ng-template #login>
+  <app-login></app-login>
+</ng-template>
+
+<ng-template #register>
+  <app-register></app-register>
+</ng-template>
