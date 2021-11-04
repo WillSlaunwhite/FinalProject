@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
     this.getTokens();
 
-    console.log();
+    console.log(this.tokens.length);
 
   }
 

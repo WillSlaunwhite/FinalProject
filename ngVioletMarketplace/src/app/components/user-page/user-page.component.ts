@@ -45,12 +45,7 @@ export class UserPageComponent implements OnInit {
     if (this.route.snapshot.paramMap.get('username')) {
       this.auth.getUser(this.route.snapshot.params['username']).subscribe(
         (retrievedUser) => {
-          console.log("retrieved display name: " + retrievedUser.displayName);
-
           this.user = retrievedUser;
-
-          console.log(this.user.displayName);
-
         },
         (failedToRetrieveUser) => {
           console.error(
@@ -67,7 +62,6 @@ export class UserPageComponent implements OnInit {
         this.transfers = retrievedListOfTransfers;
       },
       (failedToRetrieveListOfTransfers) => {
-        console.log('user id: ' + this.user.id);
         console.error(
           'userPageComponent.ngOnInit(): failed to retrieve list of transfers using transSvc.getAllUserTransfers()'
         );
@@ -78,7 +72,7 @@ export class UserPageComponent implements OnInit {
     // subscribes to populate list of bids
     this.transSvc.getAllUserBids(this.user.id).subscribe(
       (retrievedListOfBids) => {
-        this.transfers = retrievedListOfBids;
+        this.bids = retrievedListOfBids;
       },
       (failedToRetrieveListOfBids) => {
         console.error(
@@ -92,7 +86,6 @@ export class UserPageComponent implements OnInit {
     this.tokenSvc.getAllUserTokens().subscribe(
       (retrievedListOfTokens) => {
         this.tokens = retrievedListOfTokens;
-        this.test();
       },
       (failedToRetrieveListOfTokens) => {
         console.error(
@@ -101,43 +94,16 @@ export class UserPageComponent implements OnInit {
         console.error(failedToRetrieveListOfTokens);
       }
     );
-
-    // this.parameterValue = this.activatedRoute.params.subscribe((params) => {
-    //   this.setUser(params['username']);
-    // });
-
   }
 
   // Misc methods
 
-  test(): void {
-    console.log('user id: ' + this.user.id);
-    console.log('user display name: ' + this.user.displayName);
-
-    console.log("bids length: " + this.bids.length);
-    console.log("transfers length: " + this.transfers.length);
-    console.log("tokens length: " + this.tokens.length);
-
-
-    for(let bid of this.bids) {
-      console.log('bid offerAmount: ' + bid.offerAmount);
-      console.log('bid accepted: ' + bid.accepted);
-      console.log('bid buyer displayname: ' + bid.buyer.displayName);
-      console.log('bid seller displayname: ' + bid.seller.displayName);
-      console.log('bid token name: ' + bid.token.name);
-    }
-
-    for(let transfer of this.transfers) {
-      console.log("transfer buyer displayname: " + transfer.buyer.displayName);
-      console.log("transfer seller displayname: " + transfer.seller.displayName);
-      console.log("transfer description: " + transfer.description);
-      console.log("transfer token name: " + transfer.token.name);
-    }
-
-    for(let token of this.tokens) {
-      console.log("token id: " + token.id);
-      console.log("token name: " + token.name);
-    }
+  removeBid(removeBid: Bid) {
+    this.bids.forEach((bid, index) => {
+      if (removeBid == bid) {
+        this.bids.splice(index, 1);
+      }
+    });
   }
 
   loggedIn(): boolean {
