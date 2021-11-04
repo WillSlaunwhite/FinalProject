@@ -6,8 +6,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { ModalModule, BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 
 import { AppComponent } from './app.component';
@@ -29,6 +31,8 @@ import { EventsComponent } from './components/events/events.component';
 import { NewsletterComponent } from './components/newsletter/newsletter.component';
 import { BuyNFTComponent } from './components/buy-nft/buy-nft.component';
 import { BidNFTComponent } from './components/bid-nft/bid-nft.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { BlockChainComponent } from './components/block-chain/block-chain.component';
 
 
 
@@ -50,6 +54,8 @@ import { BidNFTComponent } from './components/bid-nft/bid-nft.component';
     NewsletterComponent,
     BuyNFTComponent,
     BidNFTComponent,
+    NotFoundComponent,
+    BlockChainComponent,
 
   ],
   imports: [
@@ -59,12 +65,14 @@ import { BidNFTComponent } from './components/bid-nft/bid-nft.component';
     BrowserAnimationsModule,
     CollapseModule,
     HttpClientModule,
+    AccordionModule.forRoot(),
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
   ],
   providers: [
     TokenService,
     BsModalService,
+    BsModalRef
   ],
 
   bootstrap: [AppComponent]

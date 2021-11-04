@@ -14,8 +14,6 @@
 }
 
 .actionLink {
-
-
   color: rgb(255, 255, 255) !important;
   background-color: violet !important;
   border-radius: 8px;
@@ -23,3 +21,51 @@
   border: none;
   padding: 0.5rem;
 }
+
+.column {
+  float: left;
+}
+
+/* Left and right column */
+.column.side {
+  width: 20%;
+}
+
+/* Middle column */
+.column.middle {
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  width: 50%;
+
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column.side, .column.middle {
+    width: 100%;
+  }
+}
+
+/*  */
+tr.hide-table-padding td {
+  padding: 0;
+}
+
+.expand-button {
+	position: relative;
+}
+
+.accordion-toggle .expand-button:after
+{
+  position: absolute;
+  left:.75rem;
+  top: 50%;
+  transform: translate(0, -50%);
+  content: '-';
+}
+.accordion-toggle.collapsed .expand-button:after
+{
+  content: '+';
+}
+

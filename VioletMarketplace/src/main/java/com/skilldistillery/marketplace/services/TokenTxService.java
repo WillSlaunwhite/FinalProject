@@ -18,5 +18,11 @@ public interface TokenTxService {
 	List<TokenTx> userIndex(int userId);
 	boolean destroyBid(int bidId);
 	Bid create(Bid bid);
+	List<Bid> userBids(String username);
+	
+	
+	List<TokenTx> tokenIndex(int tokenId);
+	List<TokenTx> buyerTransfersByUsername(String username);
+	List<TokenTx> sellerTransfersByUsername(String username);
 	
 }

@@ -149,6 +149,19 @@
     </div>
   </div>
 </div>
+
+<!-- ///////////////// JUNK THROWAWAY USER BUTTONS CAN TRASH THESE ONCE USED ROUTINGS ////////////////// -->
+
+
+<a type="submit" class="btn btn-primary">Create bid</a><br>
+<a type="submit" class="btn btn-primary">Create token</a><br>
+<a type="submit" class="btn btn-primary">Create transfer or something else maybe</a><br>
+
+
+
+
+
+
 <!-- ////////////////////////////NFT HISTORY// //////////////////////////////////// -->
 <div class=" card">
   <div class=" card-header"><h3 class=" title">NFT History</h3></div>
@@ -345,33 +358,51 @@
   <button>Close</button>
   </div>
 </div>
+
+
+<!--
+
+  need to fix the display for the cards so they're separate.
+  still can't get user's profile pic to show up right.
+
+
+
+ -->
+
+
+
 <!-- ////////////////////////////////////////////////////////////////// -->
   <div class="col">
     <div class="card h-100 shadow-sm" style="width: 20rem">
 
       <div class="card-header"><img class="imgsize"
-          src="https://live.staticflickr.com/65535/51633352877_8852dea13b_w.jpg"/>
+          src=""/>
       </div>
 
+  <div *ngFor="let bid of bids">
+    <div *ngIf="!bid.accepted">
       <div class="card-body">
-        <h1 class="card-title">Offer Price:</h1>
-        <h1 class="card-title">$4000</h1>
+        <h3>Token Id: {{bid.token.id}}</h3>
+        <h3>Your Price: ${{bid.token.price}}</h3><br>
+        <h1 class="card-title">Offer Price: ${{bid.offerAmount}}:</h1>
+        <h1 class="card-title">Offer Date: {{bid.bidDate}}</h1>
       </div>
-
       <div class="card-footer">
         <div class="text-center my-4">
-          <a href="https://www.linkedin.com/in/caleb-gardner-1972b6211/">
+          <a (click)="removeBid(bid)">
           <button class="btn btn-danger" style="border-radius: 12px">
             Decline Offer
           </button></a>
         </div>
         <div class="text-center my-4">
-          <a href="https://www.linkedin.com/in/caleb-gardner-1972b6211/">
+          <a (click)=[bid.accepted]="true">
           <button class="btn btn-success" style="border-radius: 12px">
            Accept Offer
           </button></a>
+          <hr style="color:black">
         </div>
       </div>
+    </div>
 
   <!-- //////////////////////////// -->
 

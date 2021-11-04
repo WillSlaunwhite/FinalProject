@@ -5,17 +5,18 @@ import { User } from "./user";
 export class Bid {
   id:number;
   description: string;
-  // price: number;
+  offerAmount: number;
   accepted: boolean;
   buyer: User;
   seller: User;
   bidDate: string;
   token: Token;
   transaction: Tokentx;
+
   constructor(
     id: number = 0,
-    // price: number = 0,
     description: string = '',
+    offerAmount: number,
     accepted: boolean | false,
     buyer: User= new User(),
     seller: User = new User(),
@@ -24,7 +25,6 @@ export class Bid {
     bidDate: string = '',
   ) {
     this.id = id;
-    // this.price = price;
     this.description = description;
     this.accepted = accepted;
     this.buyer = buyer;
@@ -32,5 +32,6 @@ export class Bid {
     this.token = token;
     this.transaction = transaction;
     this.bidDate = bidDate;
+    this.offerAmount = offerAmount;
   }
 }

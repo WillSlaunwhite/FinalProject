@@ -36,11 +36,12 @@ export class AuthService {
       })
     );
   }
+
   getUser(username: string): Observable<User> {
     return this.http.get<User>(`${this.url}/${username}`).pipe(
       catchError((err: any) => {
         console.error(err);
-        return throwError('tokenService.getUser(): Error retreiving user');
+        return throwError('auth.getUser(): Error retreiving user');
       })
     );
   }
@@ -58,6 +59,7 @@ export class AuthService {
 
   register(user: User) {
     // create request to register a new account
+    localStorage.setItem('username', user.username);
     return this.http.post(this.baseUrl + 'register', user).pipe(
       catchError((err: any) => {
         console.log(err);

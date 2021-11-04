@@ -27,12 +27,12 @@ export class HomeComponent implements OnInit {
 
     this.getTokens();
 
-    console.log();
+    console.log(this.tokens.length);
 
   }
 
   getTokens(): void {
-    this.tokenService.index().subscribe(
+    this.tokenService.getAllTokens().subscribe(
       tokenList => {
         console.log(tokenList.length);
 

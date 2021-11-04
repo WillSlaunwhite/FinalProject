@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -28,5 +33,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  @ViewChild('closebutton')
+  closebutton!: { nativeElement: { click: () => void; }; };
+  public onSubmit() {
+    this.closebutton.nativeElement.click();
+  }
   ngOnInit(): void {}
 }

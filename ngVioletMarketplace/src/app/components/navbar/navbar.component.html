@@ -1,3 +1,4 @@
+
 <div class="x-logobar row " >
   <!-- <div class="pony"><img src="https://www.freepnglogos.com/uploads/little-pony-png/little-pony-release-november-the-shillong-6.png" height="75" ></div> -->
   <div class="container-fluid pony"><img class="center-block img-responsive" src="https://live.staticflickr.com/65535/51639936281_88fbb6c452_z.jpg " height="120px" ></div>
@@ -21,12 +22,25 @@
         <li class="nav-item">
           <a class="nav-link" routerLink='/about' [routerLinkActive]="['active', 'btn-primary']">About Us</a>
         </li>
+<!-- //////////////////////////// -->
+
+
+
         <li class="nav-item" *ngIf="!loggedIn()">
-          <a class="nav-link" routerLink='/login' [routerLinkActive]="['active', 'btn-primary']">Login</a>
+          <button type="button" class="nav-link btn btn-primary" (click)="openModal(login)">Login</button>
+          <!-- <a class="nav-link" routerLink='/login' [routerLinkActive]="['active', 'btn-primary']">Login</a> -->
         </li>
+
         <li class="nav-item" *ngIf="!loggedIn()">
-          <a class="nav-link" routerLink='/register' [routerLinkActive]="['active', 'btn-primary']">Register Account</a>
+          <button type="button" class="nav-link btn btn-primary" (click)="openModal(register)">Register</button>
+          <!-- <a class="nav-link" routerLink='/login' [routerLinkActive]="['active', 'btn-primary']">Login</a> -->
         </li>
+
+
+
+
+<!-- //////////////////////////// -->
+
         <li class="nav-item" *ngIf="loggedIn()">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
@@ -38,3 +52,11 @@
       </ul>
 
 <script src="https://use.fontawesome.com/6f23f1888e.js"></script>
+
+<ng-template #login>
+  <app-login></app-login>
+</ng-template>
+
+<ng-template #register>
+  <app-register></app-register>
+</ng-template>

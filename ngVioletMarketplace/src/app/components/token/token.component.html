@@ -1,57 +1,49 @@
-<!--
-<div id="tokenList" *ngIf='!selected'>
-  <table class="table table-bordered table-striped table-hover">
-    <thead>
-    <tr>
-      <th>id</th>
-      <th>name</th>
-      <th>description</th>
-      <th>rarity</th>
-      <th>price</th>
-      <th>tokenLocation</th>
-      <th>offered</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let token of tokens">
-      <td>{{ token.id }}</td>
-      <td>{{ token.name }}</td>
-      <td>{{ token.description }}</td>
-      <td>{{ token.rarity }}</td>
-      <td>{{ token.price }}</td>
-      <td>{{ token.tokenLocation }}</td>
-      <td>{{ token.offered }}</td>
 
-    </tr>
-  </tbody>
-</table>
-</div> -->
 <br>
 <br>
-      <div class="card" style="width: 25rem">
-        <div id="tokenDetails" *ngIf="selected">
 
-          <p>{{ selected.id }}</p>
-          <p>Token: {{ selected.name }}</p>
-          <p>Description: {{ selected.description }}</p>
-          <p>Rarity: {{ selected.rarity }}</p>
-          <p>Price: {{ selected.price }}</p>
-          <p>Token Location: {{ selected.tokenLocation }}</p>
-          <p>Offered: {{ selected.offered }}</p>
-          <br>
+
+      <!-- //////////////////////////// -->
+      <div class="col">
+        <div class="card h-100 shadow-sm" style="width: 25rem">
+
+          <div class="card-header"><img class="imgsize"
+              src="https://live.staticflickr.com/65535/51633352877_8852dea13b_w.jpg"/>
+          </div>
           <div>
-            <button>
-          <a class="actionLink" routerLink='/bid' >Bid Now</a>
-        </button>
-        <button>
-          <a class="actionLink" routerLink='/buy' [routerLinkActive]="['active', 'btn-primary']">Buy Now</a>
-        </button>
-        </div>
-          <br>
-        </div>
-      </div>
 
 
+          </div>
+          <div class="card-body">
+            <h1>Token Id :</h1>
+            <h2>Token Name :</h2>
+            <h2>Offer Price: </h2>
+
+
+            </div><br>
+
+            <div class="form-group">
+              <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
+            </div>
+
+
+
+          <div class="card-footer">
+            <div class="text-center my-4">
+
+              <button class="btn btn-primary" style="border-radius: 12px" routerLink='/bid'>
+              Bid
+              </button>
+
+              <button class="btn btn-primary" style="border-radius: 12px" routerLink='/buy'>
+               Buy
+                </button>
+            </div>
+
+          </div>
+        </div>
+</div>
+<!-- //////////////////////////// -->
 <h1>TRANSACTIONS TABLE</h1>
 <table class="table table-bordered table-striped table-hover">
   <thead>
@@ -73,8 +65,8 @@
   <tr *ngFor="let transaction of tokenTransactions">
     <td>{{ transaction.id }}</td>
     <td>{{ transaction.description }}</td>
-    <!-- <td>{{ transaction.buyer }}</td>
-    <td>{{ transaction.seller }}</td> -->
+    <td>{{ transaction.buyer.displayName }}</td>
+    <td>{{ transaction.seller.displayName }}</td>
     <td>{{ transaction.token }}</td>
 
   </tr>
@@ -89,36 +81,19 @@
   <tr>
     <th>id</th>
     <th>description</th>
-    <!-- description:string;
-    buyer: User;
-    seller: User;
-    token: Token; -->
-
-
-    <th>buyer</th>
-    <th>seller</th>
-    <th>token</th>
+    <th>buyer name</th>
+    <th>seller name</th>
+    <th>token name</th>
   </tr>
 </thead>
 <tbody>
   <tr *ngFor="let bid of bids">
     <td>{{ bid.id }}</td>
     <td>{{ bid.description }}</td>
-    <td>{{ bid.buyer }}</td>
-    <td>{{ bid.seller }}</td>
-    <td>{{ bid.token }}</td>
-    <td>{{ bid.transaction }}</td>
+    <td>{{ bid.buyer.displayName }}</td>
+    <td>{{ bid.seller.displayName }}</td>
+    <td>{{ bid.token.name }}</td>
 
   </tr>
 </tbody>
 </table>
-<!--
-<div id="tokenDetails" *ngIf="selected">
-  <p>{{ selected.id }}</p>
-  <p>Token: {{ selected.name }}</p>
-  <p>Description: {{ selected.description }}</p>
-  <p>Rarity: {{ selected.rarity }}</p>
-  <p>Price: {{ selected.price }}</p>
-  <p>Token Location: {{ selected.tokenLocation }}</p>
-  <p>Offered: {{ selected.offered }}</p>
-</div> -->

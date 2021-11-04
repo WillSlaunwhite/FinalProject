@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Bid } from '../models/bid';
@@ -15,13 +16,14 @@ export class TransactionService {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private tokenSvc: TokenService
+    private tokenSvc: TokenService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
   private baseUrl = 'http://localhost:8090/';
   private url = this.baseUrl + 'api/';
   tokens: Token[] = [];
   transfers: Tokentx[] = [];
-  bids: Bid[] = [];    // needs to be bid model
 
 
 // what I'm thinking is, when you load the token page that has the list of bids
@@ -35,7 +37,8 @@ export class TransactionService {
 
 // this way, when a user navigates to a token's page, we can have it set so when they click on
 // the bids for it, they can see the pending bids yet to be accepted or denied, and on the other side,
-// if you've submitted a bid for a bet
+// if you've submitted a bid for a bet when you navigate to the page it'll show the status of your bet.
+// you'll also be able to see a concise list of these on the user's page.
 
 // logic to create and update bids and transactions
 
@@ -49,10 +52,6 @@ create(bid: Bid): Observable<Bid> {
   );
 }
 
-
-
-
-
 // logic to set users and tokens and transactions
 
 
@@ -61,13 +60,13 @@ create(bid: Bid): Observable<Bid> {
 
 
 
-
+  ///////  START TRANSFER METHODS ///////
 
 
   // search for transfers by buyer seller and then all user transactions
 
   getAllTransfers(): Observable<Tokentx[]> {
-    return this.http.get<Tokentx[]>(this.url + 'transfers/1', this.auth.getHttpOptions()).pipe(
+    return this.http.get<Tokentx[]>(this.url + 'transfers/', this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('transactionService.getAllTransfers(): Error retrieving Token Transaction list');
@@ -93,8 +92,8 @@ create(bid: Bid): Observable<Bid> {
     );
   }
 
-  getAllUserTransfers(): Observable<Tokentx[]> {
-    return this.http.get<Tokentx[]>(this.url).pipe(
+  getAllUserTransfers(id: number): Observable<Tokentx[]> {
+    return this.http.get<Tokentx[]>(this.url + 'transfers/user/' + id, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('transactionService.getAllUserTransfers(): Error retrieving Token Transaction list');
@@ -102,9 +101,49 @@ create(bid: Bid): Observable<Bid> {
     );
   }
 
+  // get a token's list of transfers
 
-  getAllBids(): Observable<Bid[]> {
-    return this.http.get<Bid[]>(this.url + 'bids/1').pipe(
+  getAllTokenTransfers(id: number): Observable<Tokentx[]> {
+    return this.http.get<Tokentx[]>(this.url + 'transfers/token/' + id).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('transactionService.getAllTokenTransfers(): Error retrieving Token Transaction list');
+      })
+    );
+  }
+
+
+ ///////  END TRANSFER METHODS ///////
+
+
+ ///////  START BID METHODS ///////
+
+
+// would we ever need to get all bids for everything?
+
+// yes we do because we want to see the active bids on an nft,
+// need to put back in.
+
+  // getAllBids(): Observable<Bid[]> {
+  //   return this.http.get<Bid[]>(this.url + 'bids/').pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError('transactionService.getAllBids(): Error retrieving Bid list');
+  //     })
+  //   );
+  // }
+
+  getAllUserBids(userId: number): Observable<Bid[]> {
+    return this.http.get<Bid[]>(this.url + 'bids/user/' + userId, this.auth.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('transactionService.getAllBids(): Error retrieving Bid list for authorized user');
+      })
+    );
+  }
+
+  getAllTokenBids(tokenId: number): Observable<Bid[]> {
+    return this.http.get<Bid[]>(this.url + 'bids/' + tokenId).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('transactionService.getAllBids(): Error retrieving Bid list');
