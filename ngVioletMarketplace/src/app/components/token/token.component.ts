@@ -37,7 +37,46 @@ export class TokenComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
  }
+//
 
+newBid: Bid = new Bid();
+
+// && this.route.snapshot.paramMap.get('tokenId')
+createBid(bid: Bid) {
+  // if(this.auth.isUserLoggedIn() ){
+
+  // console.log("clicked")
+  // this.auth.getUser(localStorage.getItem('username')).subscribe(
+
+  //   user => {
+  //     console.log(user.displayName)
+  //     // bid.token = this.selected;
+  //     // bid.seller = this.selected.owner;
+  //   },
+  //   fail => {
+  //     console.log("fail");
+  //   }
+
+  // );
+  this.newBid.token = this.selected;
+  this.newBid.seller = this.selected.owner;
+  this.transactionService.create(this.newBid).subscribe(
+    () => {
+      // this.getAllBids();
+      console.log("Success Bid")
+      this.newBid = new Bid();
+    },
+    (failed: any) => {
+      console.error('BidComponent.createBid(): Error creating Bid');
+      console.error(failed);
+    }
+  );
+// }
+}
+  // getAllBids() {
+  //   throw new Error('Method not implemented.');
+  // }
+//
   createToken(token: Token) {
     this.tokenService.create(token).subscribe(
       (newToken) => {

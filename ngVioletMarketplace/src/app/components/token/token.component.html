@@ -24,16 +24,32 @@
 
             </div><br>
 
-            <div class="form-group">
-              <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
+
+            <!--  -->
+            <div class="card-body">
+              <h1>Offer Expiration</h1>
+              <div>
+
+                <form action="/action_page.php">
+                  <label for="offerExp">Date and Time:</label>
+                  <input type="datetime-local" id="offerExp" name="offerExp" [(ngModel)]="newBid.bidDate" placeholder=""/>
+                </form>
+
+
+
+              </div><br>
+              <h1 class="card-title">Offer Price:</h1><br>
+              <h1 class="card-title"><input type="number" id="offerPrice" name="offerPrice" [(ngModel)]="newBid.offerAmount" placeholder="$6420" size="30"></h1>
+              <br>
+              <div class="form-group">
+                <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
+              </div>
             </div>
-
-
-
+            <!--  -->
           <div class="card-footer" *ngIf="loggedIn()">
             <div class="text-center my-4">
 
-              <button class="btn btn-primary" style="border-radius: 12px" routerLink='/bid'>
+              <button (click)="createBid(newBid)" class="btn btn-primary" style="border-radius: 12px">
               Bid
               </button>
 
