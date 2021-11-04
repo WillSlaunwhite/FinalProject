@@ -22,7 +22,7 @@
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/nftdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
 			<property name="javax.persistence.jdbc.user" value="nftdbuser" />
-			<property name="javax.persistence.jdbc.password" value="nftdb" />
+			<property name="javax.persistence.jdbc.password" value="violet" />
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
 
