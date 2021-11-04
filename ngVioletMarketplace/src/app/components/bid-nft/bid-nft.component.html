@@ -16,7 +16,7 @@
 
         <form action="/action_page.php">
           <label for="offerExp">Date and Time:</label>
-          <input type="datetime-local" id="offerExp" name="offerExp"> [(ngModel)]="newBid.bidDate" placeholder/>
+          <input type="datetime-local" id="offerExp" name="offerExp" [(ngModel)]="newBid.bidDate" placeholder=""/>
         </form>
 
 
@@ -29,8 +29,6 @@
         <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
       </div>
     </div>
-
-    <input type="email" id="username" class="form-control form-control-lg" [(ngModel)]="newBid.offerAmount"/>
 
 
     <div class="card-footer">

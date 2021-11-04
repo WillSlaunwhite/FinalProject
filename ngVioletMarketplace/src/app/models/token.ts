@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class Token {
   id: number;
   name: string;
@@ -7,7 +9,7 @@ export class Token {
   releaseDate: string;
   tokenLocation: string;
   offered: boolean;
-  // owner
+  owner: User= new User();
 
   constructor(
     id: number = 0,
@@ -17,7 +19,8 @@ export class Token {
     price: number = 0,
     releaseDate: string = '',
     tokenLocation: string = '',
-    offered: boolean = false
+    offered: boolean = false,
+    owner: User= new User()
   ) {
     this.id = id;
     this.name = name;
@@ -27,5 +30,6 @@ export class Token {
     this.releaseDate = releaseDate;
     this.tokenLocation = tokenLocation;
     this.offered = offered;
+    this.owner =owner;
   }
 }

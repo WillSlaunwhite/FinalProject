@@ -46,7 +46,7 @@ export class TransactionService {
 //Need to Fix Spring Controller Method
 create(bid: Bid): Observable<Bid> {
   bid.accepted = false;
-  return this.http.post<Bid>(this.url, bid, this.auth.getHttpOptions()).pipe(
+  return this.http.post<Bid>(this.url + "bids/" , bid, this.auth.getHttpOptions()).pipe(
     catchError((err: any) => {
       console.log(err);
       return throwError('transactionService.create(): Error creating bid');
