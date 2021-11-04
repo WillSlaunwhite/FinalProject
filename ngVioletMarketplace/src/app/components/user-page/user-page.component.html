@@ -4,8 +4,9 @@
   <div class=" row">
     <div class="col-md-8">
       <div class=" card">
-        <h1 style="text-align: center;">{{user.username}}'s profile</h1>
-        <div class=" card-header" (click)="editProfile=!editProfile"><h3 class=" title">Edit Profile  ⬇️</h3></div>
+        <h1>{{user.username}}'s Profile </h1>
+        <!-- <H1>{{user.biography}}</H1> -->
+        <div class=" card-header"(click)="editProfile=!editProfile"><h3 class=" title">Edit Profile  ⬇️</h3></div>
         <div class=" card-body">
           <form *ngIf="editProfile">
             <div class=" row">
@@ -16,7 +17,6 @@
                     class=" form-control"
                     type="text"
                     value="{{user.email}}"
-                    [(ngModel)]="updatedUser.email"
                   />
                 </div>
               </div>
@@ -26,8 +26,7 @@
                   <input
                     class=" form-control"
                     type="text"
-                    [(ngModel)]="updatedUser.username"
-                    placeholder={{user.username}}
+                    value="{{user.username}}"
                   />
                 </div>
               </div>
@@ -90,10 +89,11 @@
           </form>
         </div>
         <div class=" card-footer">
-          <button class=" btn btn-fill btn-primary" *ngIf="editProfile" type="submit">Save and Update</button>
+          <button class=" btn btn-fill btn-primary" type="submit">Save and Update</button>
         </div>
       </div>
     </div>
+
 
   <!-- /////////////////////////////PROFILE CARD///////////////////////////////////// -->
 
@@ -120,6 +120,13 @@
               <h5 class=" title" [(ngModel)]="user.email">Email: {{user.email}}</h5>
               <h5 class=" title" [(ngModel)]="user.role">Role: {{user.role}}</h5>
               <h5 class=" title" [(ngModel)]="user.wallet">Wallet Balance: {{user.wallet}}</h5>
+
+              <button type="button" class="nav-link btn btn-primary" (click)="openModal(createNFT)" style="color: white; justify-content: center; " >Create NFT</button>
+
+
+              <ng-template #createNFT>
+                <app-pictureupload></app-pictureupload>
+              </ng-template>
 
             </a>
             <p class=" description" [(ngModel)]="user.biography"></p>
@@ -159,9 +166,9 @@
 <!-- ///////////////// JUNK THROWAWAY USER BUTTONS CAN TRASH THESE ONCE USED ROUTINGS ////////////////// -->
 
 
-<a type="submit" class="btn btn-primary">Create bid</a><br>
-<a type="submit" class="btn btn-primary">Create token</a><br>
-<a type="submit" class="btn btn-primary">Create transfer or something else maybe</a><br>
+
+
+
 
 
 
@@ -411,5 +418,8 @@
     </div>
 
   <!-- //////////////////////////// -->
+
+
+
 
 
