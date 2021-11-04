@@ -11,48 +11,44 @@ import { TransactionService } from 'src/app/services/transaction.service';
 })
 export class BidNFTComponent implements OnInit {
 
-
-  constructor( private transactionService: TransactionService, private auth: AuthService, private route: ActivatedRoute) { }
-
 newBid: Bid = new Bid();
 bids:Bid[] = [];
 
-createBid(bid: Bid) {
-  if(this.auth.isUserLoggedIn() && this.route.snapshot.paramMap.get('tokenId')){
+// createBid(bid: Bid) {
+//   if(this.auth.isUserLoggedIn() && this.route.snapshot.paramMap.get('tokenId')){
 
 
-  this.auth.getUser(localStorage.getItem('username')).subscribe(
+//   this.auth.getUser(localStorage.getItem('username')).subscribe(
 
-    user => {
-      console.log(user.displayName)
-      bid.buyer=user;
-    },
-    fail => {
-      console.log("fail");
-    }
+//     user => {
+//       console.log(user.displayName)
+//       bid.buyer=user;
+//     },
+//     fail => {
+//       console.log("fail");
+//     }
 
-  );
+//   );
 
-  this.transactionService.create(this.newBid).subscribe(
-    () => {
-      this.getAllBids();
-      console.log("Success Bid")
-      this.newBid = new Bid();
-    },
-    (failed: any) => {
-      console.error('BidComponent.createBid(): Error creating Bid');
-      console.error(failed);
-    }
-  );
-}
-}
+//   this.transactionService.create(this.newBid).subscribe(
+//     () => {
+//       this.getAllBids();
+//       console.log("Success Bid")
+//       this.newBid = new Bid();
+//     },
+//     (failed: any) => {
+//       console.error('BidComponent.createBid(): Error creating Bid');
+//       console.error(failed);
+//     }
+//   );
+// }
+// }
   getAllBids() {
     throw new Error('Method not implemented.');
   }
 
   ngOnInit(): void {
   }
-
 
 
 }
