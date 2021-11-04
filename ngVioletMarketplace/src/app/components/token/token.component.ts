@@ -25,6 +25,7 @@ export class TokenComponent implements OnInit {
     private auth: AuthService,
     private modalService: BsModalService
   ) {}
+  showForm: boolean =false;
   bidOpen: boolean = false;
   newToken: Token = new Token();
   tokens: Token[] = [];
@@ -197,6 +198,9 @@ export class TokenComponent implements OnInit {
     this.bidOpen = !this.bidOpen;
   }
 
+  toggleShowInfo() {
+    this.showForm = !this.showForm;
+  }
   setEditToken() {
     this.editToken = Object.assign({}, this.selected);
   }
