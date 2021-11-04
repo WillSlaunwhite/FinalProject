@@ -36,6 +36,7 @@ export class UserPageComponent implements OnInit {
   editProfile: boolean = false;
 
   user: User = new User();
+  updatedUser: User = new User();
   bids: Bid[] = [];
   transfers: Tokentx[] = [];
   tokens: Token[] = [];
@@ -119,6 +120,10 @@ export class UserPageComponent implements OnInit {
         console.log('Failed to Retrieve User: user-page SetUser()');
       }
     );
+  }
+
+  updateUser(user: User) {
+    this.user = user;
   }
 
   openModalWithComponent() {

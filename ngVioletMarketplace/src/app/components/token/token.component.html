@@ -27,7 +27,7 @@
 
 
             <!--  -->
-            <div class="card-body">
+            <div class="card-body" *ngIf="bidOpen">
               <h1>Offer Expiration</h1>
               <div>
 
@@ -36,25 +36,29 @@
                   <input type="datetime-local" id="offerExp" name="offerExp" [(ngModel)]="newBid.bidDate" placeholder=""/>
                 </form>
 
-
-
               </div><br>
               <h1 class="card-title">Offer Price:</h1><br>
               <h1 class="card-title"><input type="number" id="offerPrice" name="offerPrice" [(ngModel)]="newBid.offerAmount" placeholder="$6420" size="30"></h1>
               <br>
               <div class="form-group">
-                <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
+                <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a> Of VioletMarketplace's Bidding Policy</label>
               </div>
             </div>
             <!--  -->
           <div class="card-footer" *ngIf="loggedIn()">
             <div class="text-center my-4">
 
-              <button (click)="createBid(newBid)" class="btn btn-primary" style="border-radius: 12px">
+              <button (click)="[toggleBidInfo()]" *ngIf="!bidOpen" class="btn btn-primary" style="border-radius: 12px">Make Bid</button>
+              <button (click)="[createBid(newBid)]" *ngIf="bidOpen" class="btn btn-primary" >
               Bid
               </button>
 
-              <button class="btn btn-primary" style="border-radius: 12px" routerLink='/buy'>
+
+                <button class="btn btn-primary" *ngIf="bidOpen" (click)="toggleBidInfo()" style="border-radius: 12px" >
+                Close
+                </button>
+
+              <button class="btn btn-primary" style="border-radius: 12px" *ngIf="!bidOpen" routerLink='/buy'>
                Buy
                 </button>
             </div>
@@ -69,7 +73,8 @@
 
                 <button class="btn btn-primary" style="border-radius: 12px" (click)="openModal(register)">
                  Register
-                  </button>
+                </button>
+
               </div>
 
           </div>
@@ -82,16 +87,10 @@
 <table class="table table-bordered table-striped table-hover">
   <thead>
   <tr>
-    <th>id</th>
+    <th>Id</th>
     <th>description</th>
-    <!-- description:string;
-    buyer: User;
-    seller: User;
-    token: Token; -->
-
-
-    <th>buyer</th>
-    <th>seller</th>
+    <th>Offer Amount</th>
+    <th>Owner</th>
     <th>token</th>
   </tr>
 </thead>
@@ -101,7 +100,7 @@
     <td>{{ transaction.description }}</td>
     <td>{{ transaction.buyer.displayName }}</td>
     <td>{{ transaction.seller.displayName }}</td>
-    <td>{{ transaction.token }}</td>
+    <td>{{ transaction.token.name }}</td>
 
   </tr>
 </tbody>

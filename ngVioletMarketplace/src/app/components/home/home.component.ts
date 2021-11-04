@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
 
 
   // ngOnInit(): void {
-  //   if (!this.selected && this.route.snapshot.paramMap.get('id')) {
+  //   if (!this.selected && this.route.snapshot.paramMap.get('tokenId')) {
   //     this.todoService.show(this.route.snapshot.params['id']).subscribe(
   //       (success) => {
   //         this.reloadTodos();
