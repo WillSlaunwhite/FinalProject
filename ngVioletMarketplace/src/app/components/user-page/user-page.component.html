@@ -358,6 +358,19 @@
   <button>Close</button>
   </div>
 </div>
+
+
+<!--
+
+  need to fix the display for the cards so they're separate.
+  still can't get user's profile pic to show up right.
+
+
+
+ -->
+
+
+
 <!-- ////////////////////////////////////////////////////////////////// -->
   <div class="col">
     <div class="card h-100 shadow-sm" style="width: 20rem">
@@ -366,30 +379,30 @@
           src=""/>
       </div>
 
+  <div *ngFor="let bid of bids">
+    <div *ngIf="!bid.accepted">
       <div class="card-body">
-        <h3>Token Id: </h3>
-        <h3>Your Price: </h3><br>
-        <h1 class="card-title">Offer Price:</h1>
-        <h1 class="card-title">$4000</h1><br>
-
-        <h1 class="card-title">Offer Expiration:</h1>
-        <h1 class="card-title">12/1/2021 10:20:23</h1>
+        <h3>Token Id: {{bid.token.id}}</h3>
+        <h3>Your Price: ${{bid.token.price}}</h3><br>
+        <h1 class="card-title">Offer Price: ${{bid.offerAmount}}:</h1>
+        <h1 class="card-title">Offer Date: {{bid.bidDate}}</h1>
       </div>
-
       <div class="card-footer">
         <div class="text-center my-4">
-          <a href="https://www.linkedin.com/in/caleb-gardner-1972b6211/">
+          <a (click)="removeBid(bid)">
           <button class="btn btn-danger" style="border-radius: 12px">
             Decline Offer
           </button></a>
         </div>
         <div class="text-center my-4">
-          <a href="https://www.linkedin.com/in/caleb-gardner-1972b6211/">
+          <a (click)=[bid.accepted]="true">
           <button class="btn btn-success" style="border-radius: 12px">
            Accept Offer
           </button></a>
+          <hr style="color:black">
         </div>
       </div>
+    </div>
 
   <!-- //////////////////////////// -->
 

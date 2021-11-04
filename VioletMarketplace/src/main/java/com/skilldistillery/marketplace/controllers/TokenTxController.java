@@ -65,9 +65,16 @@ public class TokenTxController {
 	}
 
 //		GET ALL TRANSFERS FOR USER REGARDLESS OF ROLE 
-	@GetMapping("transfers/{userId}")
-	public List<TokenTx> index(HttpServletRequest req, HttpServletResponse resp, @PathVariable int userId) {
-		return txSvc.userIndex(userId);
+//	@GetMapping("transfers/{userId}")
+//	public List<TokenTx> index(HttpServletRequest req, HttpServletResponse resp, @PathVariable int userId) {
+//		return txSvc.userIndex(userId);
+//	}
+	
+//		GET ALL TRANSFERS FOR USER REGARDLESS OF ROLE W/ AUTH 
+	@GetMapping("transfers/user/{userId}")
+	public List<TokenTx> index(HttpServletRequest req, HttpServletResponse resp, 
+			Principal principal) {
+		return txSvc.userIndex(userSvc.getUserByUsername(principal.getName()).getId());
 	}
 
 	/////////////// POST METHODS ///////////////////

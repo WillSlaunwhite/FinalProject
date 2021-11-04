@@ -93,7 +93,7 @@ create(bid: Bid): Observable<Bid> {
   }
 
   getAllUserTransfers(id: number): Observable<Tokentx[]> {
-    return this.http.get<Tokentx[]>(this.url + 'transfers/' + id, this.auth.getHttpOptions()).pipe(
+    return this.http.get<Tokentx[]>(this.url + 'transfers/user/' + id, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('transactionService.getAllUserTransfers(): Error retrieving Token Transaction list');
@@ -120,6 +120,9 @@ create(bid: Bid): Observable<Bid> {
 
 
 // would we ever need to get all bids for everything?
+
+// yes we do because we want to see the active bids on an nft,
+// need to put back in.
 
   // getAllBids(): Observable<Bid[]> {
   //   return this.http.get<Bid[]>(this.url + 'bids/').pipe(

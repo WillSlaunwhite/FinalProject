@@ -22,7 +22,7 @@ export class TokenService {
   // }
 
   getAllTokens(): Observable<Token[]> {
-    return this.http.get<Token[]>(this.url + "/tokens").pipe(
+    return this.http.get<Token[]>(this.baseUrl + "api/home/tokens").pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('tokenService.index(): Error retrieving Token list');
