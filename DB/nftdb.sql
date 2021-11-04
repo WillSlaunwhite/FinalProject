@@ -401,7 +401,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `nftdb`;
-INSERT INTO `market_transfer` (`id`, `transfer_date`, `token_id`, `description`, `seller_id`, `buyer_id`) VALUES (1, '2020-01-01 10:10:10', 1, 'test transfer', 1, 2);
+INSERT INTO `market_transfer` (`id`, `transfer_date`, `token_id`, `description`, `seller_id`, `buyer_id`) VALUES (1, '2020-01-01 10:10:10', 1, 'test transfer', 2, 1);
+INSERT INTO `market_transfer` (`id`, `transfer_date`, `token_id`, `description`, `seller_id`, `buyer_id`) VALUES (2, '2020-01-01 10:10:10', 2, 'test transfer', 1, 2);
+INSERT INTO `market_transfer` (`id`, `transfer_date`, `token_id`, `description`, `seller_id`, `buyer_id`) VALUES (3, '2020-01-01 10:10:10', 3, 'test transfer', 4, 3);
+INSERT INTO `market_transfer` (`id`, `transfer_date`, `token_id`, `description`, `seller_id`, `buyer_id`) VALUES (4, '2020-01-01 10:10:10', 4, 'test transfer', 3, 4);
+INSERT INTO `market_transfer` (`id`, `transfer_date`, `token_id`, `description`, `seller_id`, `buyer_id`) VALUES (15, '2020-01-01 10:10:10',5, 'test transfer', 2, 5);
 
 COMMIT;
 
