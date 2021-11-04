@@ -25,4 +25,10 @@ public interface TokenTxRepository extends JpaRepository<TokenTx, Integer>{
 			nativeQuery=true)
 	List<TokenTx> findBySeller(int sellerId);
 	
+	List<TokenTx> findByTokenId(int tokenId);
+	
+	List<TokenTx> findByBuyer_Username(String username);
+	
+	List<TokenTx> findBySeller_Username(String username);
+	
 }
