@@ -32,6 +32,7 @@ import { NewsletterComponent } from './components/newsletter/newsletter.componen
 import { BuyNFTComponent } from './components/buy-nft/buy-nft.component';
 import { BidNFTComponent } from './components/bid-nft/bid-nft.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { BlockChainComponent } from './components/block-chain/block-chain.component';
 
 
 
@@ -54,6 +55,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     BuyNFTComponent,
     BidNFTComponent,
     NotFoundComponent,
+    BlockChainComponent,
 
   ],
   imports: [
