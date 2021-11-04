@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Bid } from 'src/app/models/bid';
 
 @Component({
   selector: 'app-bid-nft',
@@ -6,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bid-nft.component.css']
 })
 export class BidNFTComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {

@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class Token {
   id: number;
   name: string;
@@ -7,7 +9,7 @@ export class Token {
   releaseDate: string;
   tokenLocation: string;
   offered: boolean;
-  // owner
+  owner: User = new User();
 
   constructor(
     id: number = 0,
