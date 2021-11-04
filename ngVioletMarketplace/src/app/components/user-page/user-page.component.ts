@@ -54,6 +54,10 @@ export class UserPageComponent implements OnInit {
       this.auth.getUser(this.route.snapshot.params['username']).subscribe(
         (retrievedUser) => {
           this.user = retrievedUser;
+          console.log(this.user.displayName);
+          this.loadTransfers();
+          this.loadBids();
+          this.loadTokens();
         },
         (failedToRetrieveUser) => {
           console.error(
@@ -65,58 +69,62 @@ export class UserPageComponent implements OnInit {
     }
 
     // subscribes to get user's transactions
-    this.transSvc.getAllUserTransfers(this.user.id).subscribe(
-      (retrievedListOfTransfers) => {
-        this.transfers = retrievedListOfTransfers;
-      },
-      (failedToRetrieveListOfTransfers) => {
-        console.error(
-          'userPageComponent.ngOnInit(): failed to retrieve list of transfers using transSvc.getAllUserTransfers()'
-        );
-        console.error(failedToRetrieveListOfTransfers);
-      }
-    );
+
 
     // subscribes to populate list of bids
-    this.transSvc.getAllUserBids(this.user.id).subscribe(
-      (retrievedListOfBids) => {
-        this.bids = retrievedListOfBids;
-      },
-      (failedToRetrieveListOfBids) => {
-        console.error(
-          'userPageComponent.ngOnInit(): failed to retrieve list of transfes using transSvc.getAllUserBids()'
-        );
-        console.error(failedToRetrieveListOfBids);
-      }
-    );
+
 
     // subscribes to populate list of user's tokens
-    this.tokenSvc.getAllUserTokens().subscribe(
-      (retrievedListOfTokens) => {
-        this.tokens = retrievedListOfTokens;
-      },
-      (failedToRetrieveListOfTokens) => {
-        console.error(
-          'userPageComponent.ngOnInit(): failed to retrieve list of transfes using transSvc.getAllUserTransfers()'
-        );
-        console.error(failedToRetrieveListOfTokens);
-      }
-    );
+
   }
 
   // Misc methods
 
   removeBid(removeBid: Bid) {
-    this.bids.forEach((bid, index) => {
-      if (removeBid == bid) {
-        this.bids.splice(index, 1);
-      }
-    });
-  }
+        this.transSvc.destroy(removeBid);
+        this.loadBids();
 
+      }
+
+
+  loadTokens(){this.tokenSvc.getAllUserTokens().subscribe(
+    (retrievedListOfTokens) => {
+      this.tokens = retrievedListOfTokens;
+    },
+    (failedToRetrieveListOfTokens) => {
+      console.error(
+        'userPageComponent.ngOnInit(): failed to retrieve list of transfes using transSvc.getAllUserTransfers()'
+      );
+      console.error(failedToRetrieveListOfTokens);
+    }
+  );}
+  loadTransfers(){
+  this.transSvc.getAllUserTransfers(this.user.id).subscribe(
+    (retrievedListOfTransfers) => {
+      this.transfers = retrievedListOfTransfers;
+    },
+    (failedToRetrieveListOfTransfers) => {
+      console.error(
+        'userPageComponent.ngOnInit(): failed to retrieve list of transfers using transSvc.getAllUserTransfers()'
+      );
+      console.error(failedToRetrieveListOfTransfers);
+    }
+  );
+  }
   loggedIn(): boolean {
     return this.auth.isUserLoggedIn();
   }
+  loadBids(){this.transSvc.getAllUserBids(this.user.id).subscribe(
+    (retrievedListOfBids) => {
+      this.bids = retrievedListOfBids;
+    },
+    (failedToRetrieveListOfBids) => {
+      console.error(
+        'userPageComponent.ngOnInit(): failed to retrieve list of transfes using transSvc.getAllUserBids()'
+      );
+      console.error(failedToRetrieveListOfBids);
+    }
+  );}
 
   setUser(username: string): void {
     this.auth.getUser(username).subscribe(
