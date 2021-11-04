@@ -112,7 +112,7 @@ public class TokenTxController {
 
 //	DELETE BID BY BID ID
 	@DeleteMapping("bids/delete/{bidId}")
-	public void destroyBid(HttpServletResponse res, HttpServletRequest req, @PathVariable int bidId) {
+	public void destroyBid(HttpServletResponse res, HttpServletRequest req, @PathVariable int bidId, Principal principal) {
 		if (txSvc.destroyBid(bidId)) {
 			res.setStatus(204);
 		} else {
