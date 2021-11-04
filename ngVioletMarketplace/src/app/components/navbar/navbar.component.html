@@ -31,13 +31,16 @@
           <!-- <a class="nav-link" routerLink='/login' [routerLinkActive]="['active', 'btn-primary']">Login</a> -->
         </li>
 
+        <li class="nav-item" *ngIf="!loggedIn()">
+          <button type="button" class="nav-link btn btn-primary" (click)="openModal(register)">Register</button>
+          <!-- <a class="nav-link" routerLink='/login' [routerLinkActive]="['active', 'btn-primary']">Login</a> -->
+        </li>
+
 
 
 
 <!-- //////////////////////////// -->
-        <li class="nav-item" *ngIf="!loggedIn()">
-          <a class="nav-link" routerLink='/register' [routerLinkActive]="['active', 'btn-primary']">Register Account</a>
-        </li>
+
         <li class="nav-item" *ngIf="loggedIn()">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
@@ -52,4 +55,8 @@
 
 <ng-template #login>
   <app-login></app-login>
+</ng-template>
+
+<ng-template #register>
+  <app-register></app-register>
 </ng-template>

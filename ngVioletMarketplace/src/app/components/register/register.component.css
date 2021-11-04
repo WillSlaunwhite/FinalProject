@@ -4,4 +4,16 @@
   height: 300px;
 
 }
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
 
+.input {
+  color: black !important;
+}
+
+.form-control, .form-group {
+  color: black !important;
+
+}
