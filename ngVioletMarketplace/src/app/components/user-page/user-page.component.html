@@ -117,12 +117,12 @@
               <h5 class=" title" [(ngModel)]="user.email">Email: {{user.email}}</h5>
               <h5 class=" title" [(ngModel)]="user.role">Role: {{user.role}}</h5>
               <h5 class=" title" [(ngModel)]="user.wallet">Wallet Balance: {{user.wallet}}</h5>
-
-              <button type="button" class="nav-link btn btn-primary" (click)="openModal(createNFT)" style="color: white; justify-content: center; " >Create NFT</button>
+<br><br>
+              <button type="button" class="nft btn btn-primary"  align="center" (click)="openModal(createNFT)" style="color: white; justify-content: center; " >Create NFT</button>
 
 
               <ng-template #createNFT>
-                <app-pictureupload></app-pictureupload>
+             <app-pictureupload></app-pictureupload>
               </ng-template>
 
             </a>
