@@ -2,7 +2,7 @@
 
 <div class=" content">
   <div class=" row">
-    <div class=" col-md-8">
+    <div class="col-md-8">
       <div class=" card">
         <h1>{{user.username}}'s Profile </h1>
         <!-- <H1>{{user.biography}}</H1> -->
@@ -99,7 +99,10 @@
 
 
   <!-- /////////////////////////////PROFILE CARD///////////////////////////////////// -->
-    <div class=" col-md-4">
+
+
+  <div class=" col-md-4">
+    <a (click)="editProfile=!editProfile">
       <div class=" card card-user">
         <div class=" card-body">
           <p class=" card-text"></p>
@@ -158,6 +161,7 @@
           </div>
         </div>
       </div>
+    </a>
     </div>
   </div>
 </div>

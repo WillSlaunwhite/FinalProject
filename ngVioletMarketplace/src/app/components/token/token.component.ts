@@ -9,7 +9,7 @@ import { TransactionService } from 'src/app/services/transaction.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { BsModalRef , BsModalService} from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-token',
@@ -23,7 +23,7 @@ export class TokenComponent implements OnInit {
     private tokenService: TokenService,
     private transactionService: TransactionService,
     private auth: AuthService,
-    private modalService: BsModalService,
+    private modalService: BsModalService
   ) {}
   bidOpen: boolean = false;
   newToken: Token = new Token();
@@ -32,52 +32,29 @@ export class TokenComponent implements OnInit {
   editToken: Token | null = null;
   tokenTransactions: Tokentx[] = [];
   bids: Bid[] = [];
-  modalRef: BsModalRef= new BsModalRef();
+  modalRef: BsModalRef = new BsModalRef();
   username: string | null = null;
   newBid: Bid = new Bid();
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
- }
-//
+  }
+  //
 
-
-// && this.route.snapshot.paramMap.get('tokenId')
-createBid(bid: Bid) {
-  // if(this.auth.isUserLoggedIn() ){
-
-  // console.log("clicked")
-  // this.auth.getUser(localStorage.getItem('username')).subscribe(
-
-  //   user => {
-  //     console.log(user.displayName)
-  //     // bid.token = this.selected;
-  //     // bid.seller = this.selected.owner;
-  //   },
-  //   fail => {
-  //     console.log("fail");
-  //   }
-
-  // );
-  this.newBid.token = this.selected;
-  this.newBid.seller = this.selected.owner;
-  this.transactionService.create(this.newBid).subscribe(
-    () => {
-      // this.getAllBids();
-      console.log("Success Bid")
-      this.newBid = new Bid();
-    },
-    (failed: any) => {
-      console.error('BidComponent.createBid(): Error creating Bid');
-      console.error(failed);
-    }
-  );
-// }
-}
-  // getAllBids() {
-  //   throw new Error('Method not implemented.');
-  // }
-//
+  createBid(bid: Bid) {
+    this.newBid.token = this.selected;
+    this.newBid.seller = this.selected.owner;
+    this.transactionService.create(this.newBid).subscribe(
+      (createdBid) => {
+        console.log('Successfully Created Bid');
+        this.newBid = new Bid();
+      },
+      (failed: any) => {
+        console.error('BidComponent.createBid(): Error creating Bid');
+        console.error(failed);
+      }
+    );
+  }
   createToken(token: Token) {
     this.tokenService.create(token).subscribe(
       (newToken) => {
@@ -174,48 +151,41 @@ createBid(bid: Bid) {
         (success) => {
           this.selected = success;
 
-          // subscribe to assign selected its transfers
-
-          // I think we would only need to see bids on this page, right?
-          // no need to pull bids for another reason than to see them on a specific
-          // token, so we don't need to even populate bids if we don't route to show.
+          // subscribe to assign selected its bids
 
           this.transactionService.getAllTokenBids(this.selected.id).subscribe(
-            retrievedTokenBids => {
+            (retrievedTokenBids) => {
               this.bids = retrievedTokenBids;
             },
-            failedToRetrieveBids => {
-              console.error('userPageComponent.ngOnInit(): failed to retrieve list of Token bids using transactionService.getAllTokenBids()');
+            (failedToRetrieveBids) => {
+              console.error(
+                'userPageComponent.ngOnInit(): failed to retrieve list of Token bids using transactionService.getAllTokenBids()'
+              );
               console.error(failedToRetrieveBids);
             }
           );
 
-          this.transactionService.getAllTokenTransfers(this.selected.id).subscribe(
-            retrievedTransactions => {
-              this.tokenTransactions = retrievedTransactions;
-            },
-            failedToRetrieveTransactions => {
-              console.error(failedToRetrieveTransactions);
-            }
-          )
+          // subscribe to assign 
 
+          this.transactionService
+            .getAllTokenTransfers(this.selected.id)
+            .subscribe(
+              (retrievedTransactions) => {
+                this.tokenTransactions = retrievedTransactions;
+              },
+              (failedToRetrieveTransactions) => {
+                console.error(failedToRetrieveTransactions);
+              }
+            );
         },
         (fail) => {
           console.error(
             'tokenComponent.ngOnInit(): error initializing Token by id'
           );
-          console.error('routing to index');
 
           this.tokenService.getAllTokens();
 
-          console.error('Succeeded routing to index, getting transfers');
-
           this.transactionService.getAllTransfers();
-          console.log(this.tokenTransactions.length);
-
-          console.error('succeded getting transfers');
-
-          console.error(fail);
         }
       );
     } else {
@@ -235,9 +205,6 @@ createBid(bid: Bid) {
     this.selected = token;
   }
 
-
-
-
   // hideToken() {
   //   this.selected = null;
   // }
@@ -245,6 +212,4 @@ createBid(bid: Bid) {
   loggedIn() {
     return this.auth.isUserLoggedIn();
   }
-
-
 }
