@@ -53,6 +53,15 @@ create(bid: Bid): Observable<Bid> {
     })
   );
 }
+destroy(bid:Bid){
+  this.http.delete<Bid>(this.url + "bids/delete/"+bid.id,this.auth.getHttpOptions()).pipe(
+    catchError((err: any) => {
+      console.log(err);
+      return throwError('transactionService.create(): Error creating bid');
+    })
+  );
+}
+
 
 // logic to set users and tokens and transactions
 

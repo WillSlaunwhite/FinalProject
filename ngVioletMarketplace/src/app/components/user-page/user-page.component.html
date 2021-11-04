@@ -11,6 +11,7 @@
                 <div class=" form-group">
                   <label> Email Address </label>
                   <input
+                  name="email"
                     class=" form-control"
                     type="text"
                     value="{{user.email}}"
@@ -22,6 +23,7 @@
                 <div class=" form-group">
                   <label> Username </label>
                   <input
+                  name="username"
                     class=" form-control"
                     type="text"
                     [(ngModel)]="updatedUser.username"
@@ -32,13 +34,14 @@
               <div class=" col-md-5 pr-md-1">
                 <div class=" form-group">
                   <label> Role </label>
-                  <input class=" form-control" type="text" value="{{user.role}}" />
+                  <input name="role" class=" form-control" type="text" value="{{user.role}}" />
                 </div>
               </div>
               <div class=" col-md-5 pr-md-1">
                 <div class=" form-group">
                   <label>Profile Image</label>
                   <input
+                  name="profileImage"
                     class=" form-control"
                     value="{{user.pictureUrl}}"
                     type="text"
@@ -50,14 +53,14 @@
               <div class=" col-md-5 pr-md-1">
                 <div class=" form-group">
                   <label> Wallet </label>
-                  <input class=" form-control" type="text" value="Wallet ID" />
+                  <input name="wallet" class=" form-control" type="text" value="Wallet ID" />
                 </div>
               </div>
 
               <div class=" col-md-5 pr-md-1">
                 <div class=" form-group">
                   <label> Facebook </label>
-                  <input class=" form-control" type="text" value="www.facebook.com/JimmyG" />
+                  <input name="facebook" class=" form-control" type="text" value="www.facebook.com/JimmyG" />
                 </div>
               </div>
             </div>
@@ -65,14 +68,14 @@
               <div class=" col-md-5 pr-md-1">
                 <div class=" form-group">
                   <label> Twitter </label>
-                  <input class=" form-control" type="text" value="@JimmyG" />
+                  <input name="twitter" class=" form-control" type="text" value="@JimmyG" />
                 </div>
               </div>
 
               <div class=" col-md-5 pr-md-1">
                 <div class=" form-group">
                   <label> Google </label>
-                  <input class=" form-control" type="text" value="JimmyGaroppolo@gmail.com" />
+                  <input name="google" class=" form-control" type="text" value="JimmyGaroppolo@gmail.com" />
                 </div>
               </div>
             </div>
@@ -80,7 +83,7 @@
               <div class=" col-md-10">
                 <div class=" form-group">
                   <label> About Me </label>
-                  <textarea class=" form-control" cols="100" rows="4">{{user.biography}}
+                  <textarea name="aboutMe"  class=" form-control" cols="100" rows="4">{{user.biography}}
                   </textarea>
                 </div>
               </div>
@@ -111,13 +114,13 @@
               />
 
               <h5 class=" title" >Username: {{user.username}}</h5>
-              <h5 class=" title" [(ngModel)]="user.displayName">Display Name: {{user.displayName}}</h5>
-              <h5 class=" title" [(ngModel)]="user.email">Email: {{user.email}}</h5>
-              <h5 class=" title" [(ngModel)]="user.role">Role: {{user.role}}</h5>
-              <h5 class=" title" [(ngModel)]="user.wallet">Wallet Balance: {{user.wallet}}</h5>
+              <h5 class=" title" >Display Name: {{user.displayName}}</h5>
+              <h5 class=" title">Email: {{user.email}}</h5>
+              <h5 class=" title"> Role: {{user.role}}</h5>
+              <h5 class=" title">Wallet Balance: {{user.wallet}}</h5>
 
             </a>
-            <p class=" description" [(ngModel)]="user.biography"></p>
+            <p class=" description" >{{user.biography}}</p>
           </div>
           <!-- <div class=" card-description">
             {{user.biography}}
@@ -153,9 +156,9 @@
 <!-- ///////////////// JUNK THROWAWAY USER BUTTONS CAN TRASH THESE ONCE USED ROUTINGS ////////////////// -->
 
 
-<a type="submit" class="btn btn-primary">Create bid</a><br>
+<!-- <a type="submit" class="btn btn-primary">Create bid</a><br> -->
 <a type="submit" class="btn btn-primary">Create token</a><br>
-<a type="submit" class="btn btn-primary">Create transfer or something else maybe</a><br>
+<!-- <a type="submit" class="btn btn-primary">Create transfer or something else maybe</a><br> -->
 
 
 
@@ -164,47 +167,37 @@
 
 <!-- ////////////////////////////NFT HISTORY// //////////////////////////////////// -->
 <div class=" card">
-  <div class=" card-header"><h3 class=" title">NFT History</h3></div>
+  <div class=" card-header"><h3 class=" title">My Current Bid Ledger</h3></div>
   <div class=" card-body">
 <div>
   <table class="table">
     <thead>
       <!-- <tr><h1 justify-content-center>NFTs</h1></tr> -->
         <tr>
-          <th>Media</th>
+          <th>Bid id</th>
             <th class="text-center">Token</th>
-            <th>Name</th>
-            <th>Created On</th>
-            <th>Purchase Date</th>
-            <th>Sold Date</th>
-            <th>Offered for Sale</th>
-            <th class="text-right">Purchase Price</th>
-            <th class="text-right">Actions</th>
-        </tr>
+            <th>Offered Amount</th>
+            <th>Offered By</th>
+            <th>Offered Date</th>
+            </tr>
     </thead>
     <tbody>
-        <tr>
-          <td> <img src="https://i.pinimg.com/originals/fa/41/b4/fa41b4b61fbe2bc402e98da71a9d7b34.png" width="30px" alt="..."></td>
-            <td class="text-center">1</td>
-            <td>Tom Brady</td>
-            <td>2000</td>
-            <td>2012</td>
-            <td>2013</td>
-            <td>Yes</td>
-            <td class="text-right">&dollar; 99,225</td>
+        <tr *ngFor="let bid of bids">
+          <!-- <td> <img src="{{}}" width="30px" alt="..."></td> -->
+            <td class="text-center">{{bid.id}}</td>
+            <td>{{bid.token.name}}</td>
+            <td>{{bid.offerAmount}}</td>
+            <td>{{bid.buyer.displayName}}</td>
+            <td>{{bid.bidDate}}</td>
+
             <td class="td-actions text-right">
-              <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm " data-original-title="" title="">
-                <i class="tim-icons icon-single-02"></i>
-              </button>
-              <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm " data-original-title="" title="">
-                <i class="tim-icons icon-settings"></i>
-              </button>
-              <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm " data-original-title="" title="">
-                <i class="tim-icons icon-simple-remove"></i>
+
+               <button (click)="removeBid(bid)" type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm " data-original-title="" title="">
+                Delete
                 </button>
             </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td> <img src="https://i.pinimg.com/originals/fa/41/b4/fa41b4b61fbe2bc402e98da71a9d7b34.png" width="30px" alt="..."></td>
             <td class="text-center">2</td>
             <td>Bart Star</td>
@@ -224,7 +217,7 @@
                 <i class="tim-icons icon-simple-remove"></i>
                 </button>
             </td>
-        </tr>
+        </tr> -->
       </tbody>
 </table>
 </div>
@@ -389,16 +382,16 @@
       </div>
       <div class="card-footer">
         <div class="text-center my-4">
-          <a (click)="removeBid(bid)">
-          <button class="btn btn-danger" style="border-radius: 12px">
+
+          <button (click)="removeBid(bid)" class="btn-primary" style="border-radius: 20px">
             Decline Offer
-          </button></a>
+          </button>
         </div>
         <div class="text-center my-4">
-          <a (click)=[bid.accepted]="true">
+          <!-- <a (click)=[bid.accepted]="true">
           <button class="btn btn-success" style="border-radius: 12px">
            Accept Offer
-          </button></a>
+          </button></a> -->
           <hr style="color:black">
         </div>
       </div>
