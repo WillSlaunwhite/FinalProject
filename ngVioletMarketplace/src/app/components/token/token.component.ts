@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bid } from 'src/app/models/bid';
 import { Token } from 'src/app/models/token';
@@ -9,6 +9,7 @@ import { TransactionService } from 'src/app/services/transaction.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BsModalRef , BsModalService} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-token',
@@ -21,14 +22,21 @@ export class TokenComponent implements OnInit {
     private router: Router,
     private tokenService: TokenService,
     private transactionService: TransactionService,
-    private auth: AuthService
+    private auth: AuthService,
+    private modalService: BsModalService,
   ) {}
   newToken: Token = new Token();
   tokens: Token[] = [];
-  selected: Token | null = null;
+  selected: Token = new Token();
   editToken: Token | null = null;
   tokenTransactions: Tokentx[] = [];
   bids: Bid[] = [];
+  modalRef: BsModalRef= new BsModalRef();
+  username: string | null = null;
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+ }
 
   createToken(token: Token) {
     this.tokenService.create(token).subscribe(
@@ -183,11 +191,13 @@ export class TokenComponent implements OnInit {
     this.selected = token;
   }
 
-  hideToken() {
-    this.selected = null;
-  }
+  // hideToken() {
+  //   this.selected = null;
+  // }
 
   loggedIn() {
     return this.auth.isUserLoggedIn();
   }
+
+
 }
