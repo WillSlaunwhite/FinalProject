@@ -11,3 +11,6 @@ form {
 ::placeholder {
   color:azure;
 }
+.btn-primary  {
+  background-color: #8941CCa9 !important;
+}

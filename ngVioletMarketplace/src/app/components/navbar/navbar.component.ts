@@ -12,7 +12,10 @@ import { FormsModule } from '@angular/forms';
 export class NavbarComponent implements OnInit {
 
   constructor(private auth: AuthService,
-    private modalService: BsModalService,  modalRef: BsModalRef) { }
+    private modalService: BsModalService,
+    modalRef: BsModalRef) { }
+
+
   modalRef: BsModalRef= new BsModalRef();
   username: string | null = null;
   // check login
@@ -20,21 +23,7 @@ export class NavbarComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
  }
-  // openModalWithComponent() {
-  //   const initialState: ModalOptions = {
-  //     initialState: {
-  //       list: [
-  //         'Open a modal with component',
-  //         'Pass your data',
-  //         'Do something else',
-  //         '...'
-  //       ],
-  //       title: 'Modal with component'
-  //     }
-  //   };
-  //   this.bsModalRef = this.modalService.show(PictureuploadComponent, initialState);
-  //   this.bsModalRef.content.closeBtnName = 'Close';
-  // }
+
 
  loggedIn(): boolean {
   return this.auth.isUserLoggedIn();
