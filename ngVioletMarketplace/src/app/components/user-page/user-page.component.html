@@ -2,9 +2,11 @@
 
 <div class=" content">
   <div class=" row">
-    <div class=" col-md-8">
+    <div class="col-md-8">
       <div class=" card">
-        <div class=" card-body"><h5 style="color:white; font-size: 25px">{{user.displayName}}'s Profile</h5>
+        <h1 style="text-align: center;">{{user.username}}'s profile</h1>
+        <div class=" card-header" (click)="editProfile=!editProfile"><h3 class=" title">Edit Profile  ⬇️</h3></div>
+        <div class=" card-body">
           <form *ngIf="editProfile">
             <div class=" row">
               <div class=" col-md-5 pr-md-1">
@@ -94,7 +96,10 @@
     </div>
 
   <!-- /////////////////////////////PROFILE CARD///////////////////////////////////// -->
-    <div class=" col-md-4">
+
+
+  <div class=" col-md-4">
+    <a (click)="editProfile=!editProfile">
       <div class=" card card-user">
         <div class=" card-body">
           <p class=" card-text"></p>
@@ -146,6 +151,7 @@
           </div>
         </div>
       </div>
+    </a>
     </div>
   </div>
 </div>
