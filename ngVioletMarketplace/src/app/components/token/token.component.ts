@@ -25,6 +25,7 @@ export class TokenComponent implements OnInit {
     private auth: AuthService,
     private modalService: BsModalService,
   ) {}
+  bidOpen: boolean = false;
   newToken: Token = new Token();
   tokens: Token[] = [];
   selected: Token = new Token();
@@ -33,13 +34,13 @@ export class TokenComponent implements OnInit {
   bids: Bid[] = [];
   modalRef: BsModalRef= new BsModalRef();
   username: string | null = null;
+  newBid: Bid = new Bid();
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
  }
 //
 
-newBid: Bid = new Bid();
 
 // && this.route.snapshot.paramMap.get('tokenId')
 createBid(bid: Bid) {
@@ -119,23 +120,23 @@ createBid(bid: Bid) {
     );
   }
 
-  // getAllTransfers() {
-  //   this.transactionService.getAllTransfers().subscribe(
-  //     (tokentxList) => {
-  //       console.log(this.tokenTransactions.length);
+  getAllTokenTransfers() {
+    this.transactionService.getAllTokenTransfers(this.selected.id).subscribe(
+      (tokentxList) => {
+        console.log(this.tokenTransactions.length);
 
-  //       this.tokenTransactions = tokentxList;
+        this.tokenTransactions = tokentxList;
 
-  //       console.log(this.tokenTransactions.length);
-  //     },
-  //     (fail) => {
-  //       console.error(
-  //         'tokenComponent.getAllTransfers(): error getting transfers'
-  //       );
-  //       console.error(fail);
-  //     }
-  //   );
-  // }
+        console.log(this.tokenTransactions.length);
+      },
+      (fail) => {
+        console.error(
+          'tokenComponent.getAllTransfers(): error getting transfers'
+        );
+        console.error(fail);
+      }
+    );
+  }
 
   getBidsForSelectedToken() {
     if (this.selected) {
@@ -173,10 +174,6 @@ createBid(bid: Bid) {
         (success) => {
           this.selected = success;
 
-          console.log('succeeded getting token, attempting to get transfers.');
-
-
-
           // subscribe to assign selected its transfers
 
           // I think we would only need to see bids on this page, right?
@@ -193,11 +190,15 @@ createBid(bid: Bid) {
             }
           );
 
-          console.log(
-            'succeeded getting transfers, attempting to get all bids'
-          );
+          this.transactionService.getAllTokenTransfers(this.selected.id).subscribe(
+            retrievedTransactions => {
+              this.tokenTransactions = retrievedTransactions;
+            },
+            failedToRetrieveTransactions => {
+              console.error(failedToRetrieveTransactions);
+            }
+          )
 
-          console.log('successfully retrieved all bids');
         },
         (fail) => {
           console.error(
@@ -222,6 +223,10 @@ createBid(bid: Bid) {
     }
   }
 
+  toggleBidInfo() {
+    this.bidOpen = !this.bidOpen;
+  }
+
   setEditToken() {
     this.editToken = Object.assign({}, this.selected);
   }
@@ -229,6 +234,9 @@ createBid(bid: Bid) {
   displayToken(token: Token) {
     this.selected = token;
   }
+
+
+
 
   // hideToken() {
   //   this.selected = null;
