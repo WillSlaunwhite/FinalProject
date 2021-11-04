@@ -32,6 +32,7 @@ const routes: Routes = [
   { path: 'block', component: BlockComponent},
   { path: 'buy', component: BuyNFTComponent},
   { path: 'bid', component: BidNFTComponent},
+  { path: 'bid/:userId', component: BidNFTComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
 
   // { path: '**', component: NotFoundComponent }

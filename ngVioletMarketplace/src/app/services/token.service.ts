@@ -21,8 +21,17 @@ export class TokenService {
   //   );
   // }
 
-  index(): Observable<Token[]> {
-    return this.http.get<Token[]>(this.baseUrl+"api/home/tokens").pipe(
+  getAllTokens(): Observable<Token[]> {
+    return this.http.get<Token[]>(this.url + "/tokens").pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('tokenService.index(): Error retrieving Token list');
+      })
+    );
+  }
+
+  getAllUserTokens(): Observable<Token[]> {
+    return this.http.get<Token[]>(this.url + "/myTokens", this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('tokenService.index(): Error retrieving Token list');
@@ -44,7 +53,7 @@ export class TokenService {
     return this.http.get<Token>(`${this.url}/id/${id}`).pipe(
       catchError((err: any) => {
         console.error(err);
-        return throwError('tokenService.show(): Error getting Token');
+        return throwError('tokenService.show(): Error navigating to Token');
       })
     );
   }

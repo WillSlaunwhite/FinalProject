@@ -65,8 +65,8 @@
   <tr *ngFor="let transaction of tokenTransactions">
     <td>{{ transaction.id }}</td>
     <td>{{ transaction.description }}</td>
-    <!-- <td>{{ transaction.buyer }}</td>
-    <td>{{ transaction.seller }}</td> -->
+    <td>{{ transaction.buyer.displayName }}</td>
+    <td>{{ transaction.seller.displayName }}</td>
     <td>{{ transaction.token }}</td>
 
   </tr>
@@ -81,27 +81,19 @@
   <tr>
     <th>id</th>
     <th>description</th>
-    <!-- description:string;
-    buyer: User;
-    seller: User;
-    token: Token; -->
-
-
-    <th>buyer</th>
-    <th>seller</th>
-    <th>token</th>
+    <th>buyer name</th>
+    <th>seller name</th>
+    <th>token name</th>
   </tr>
 </thead>
 <tbody>
   <tr *ngFor="let bid of bids">
     <td>{{ bid.id }}</td>
     <td>{{ bid.description }}</td>
-    <td>{{ bid.buyer }}</td>
-    <td>{{ bid.seller }}</td>
-    <td>{{ bid.token }}</td>
-    <td>{{ bid.transaction }}</td>
+    <td>{{ bid.buyer.displayName }}</td>
+    <td>{{ bid.seller.displayName }}</td>
+    <td>{{ bid.token.name }}</td>
 
   </tr>
 </tbody>
 </table>
-

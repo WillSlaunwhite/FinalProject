@@ -24,4 +24,7 @@ public interface BidRepository extends JpaRepository<Bid, Integer>{
 			nativeQuery=true)
 	List<Bid> findBySeller(int sellerId);
 	
+	
+//	List<Bid> getByUser_Username(String username);
+	
 }
