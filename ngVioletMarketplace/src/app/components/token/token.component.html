@@ -1,32 +1,9 @@
 
 <br>
 <br>
-      <!-- <div class="card" style="width: 25rem">
-        <div id="tokenDetails" *ngIf="selected">
 
-          <p>{{ selected.id }}</p>
-          <p>Token: {{ selected.name }}</p>
-          <p>Description: {{ selected.description }}</p>
-          <p>Rarity: {{ selected.rarity }}</p>
-          <p>Price: {{ selected.price }}</p>
-          <p>Token Location: {{ selected.tokenLocation }}</p>
-          <p>Offered: {{ selected.offered }}</p>
-          <br>
-          <div>
-
-          <a class="actionLink mx-5" routerLink='/bid'  >Bid Now</a>
-
-
-          <a class="actionLink" routerLink='/buy' >Buy Now</a>
-
-        </div>
-          <br>
-        </div>
-      </div> -->
 
       <!-- //////////////////////////// -->
-<div class="row">
-        <div class="column side">
       <div class="col">
         <div class="card h-100 shadow-sm" style="width: 25rem">
 
@@ -38,180 +15,76 @@
 
           </div>
           <div class="card-body">
-            <div class="card" style="width: 25rem">
-              <div id="tokenDetails" *ngIf="selected">
+            <h1>Token Id :</h1>
+            <h2>Token Name :</h2>
+            <h2>Offer Price: </h2>
 
-                <p>{{ selected.id }}</p>
-                <p>Token: {{ selected.name }}</p>
-                <p>Description: {{ selected.description }}</p>
-                <p>Rarity: {{ selected.rarity }}</p>
-                <p>Price: {{ selected.price }}</p>
-                <p>Token Location: {{ selected.tokenLocation }}</p>
-                <p>Offered: {{ selected.offered }}</p>
-                <br>
 
-                <br>
-              </div>
+            </div><br>
+
+            <div class="form-group">
+              <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
             </div>
+
 
 
           <div class="card-footer">
             <div class="text-center my-4">
-              <div>
 
-                <a class="actionLink mx-5" routerLink='/bid'  >Bid Now</a>
+              <button class="btn btn-primary" style="border-radius: 12px" routerLink='/bid'>
+              Bid
+              </button>
 
-
-                <a class="actionLink mx-5" routerLink='/buy' >Buy Now</a>
-
-              </div>
+              <button class="btn btn-primary" style="border-radius: 12px" routerLink='/buy'>
+               Buy
+                </button>
             </div>
 
           </div>
-          </div>
-          </div>
-          </div>
-  </div>
+        </div>
+</div>
 <!-- //////////////////////////// -->
-<div class="column middle">
 <h1>TRANSACTIONS TABLE</h1>
-<table class="table table-bordered table-striped table-hover w-50">
+<table class="table table-bordered table-striped table-hover">
   <thead>
   <tr>
     <th>id</th>
     <th>description</th>
+    <!-- description:string;
+    buyer: User;
+    seller: User;
+    token: Token; -->
+
+
     <th>buyer</th>
     <th>seller</th>
     <th>token</th>
   </tr>
 </thead>
-
-<!-- //////////////////////////// -->
-
-
 <tbody>
   <tr *ngFor="let transaction of tokenTransactions">
     <td>{{ transaction.id }}</td>
     <td>{{ transaction.description }}</td>
-    <td>{{ transaction.buyer.displayName }}</td>
-    <td>{{ transaction.seller.displayName }}</td>
-    <td>{{ transaction.token.name }}</td>
+    <!-- <td>{{ transaction.buyer }}</td>
+    <td>{{ transaction.seller }}</td> -->
+    <td>{{ transaction.token }}</td>
 
   </tr>
 </tbody>
-</table> -->
-
-
-<div class="row">
-  <div class="column" style="background-color:#aaa;">
-    <table class="table table-bordered table-striped table-hover" style="background-color: goldenrod;">
-      <thead>
-      <tr>
-        <th>id</th>
-        <th>description</th>
-
-
-        <th>buyer</th>
-        <th>seller</th>
-        <th>token</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let bid of bids">
-        <td><h1>Token name:</h1>{{ bid.token.name }}</td>
-        <td>{{ bid.description }}</td>
-        <td>{{ bid.buyer }}</td>
-        <td>{{ bid.seller }}</td>
-        <td>{{ bid.token }}</td>
-        <td>{{ bid.transaction }}</td>
-
-      </tr>
-    </tbody>
-    </table>
-  </div>
-  <div class="column" style="background-color: lightslategray;">
-    <h2>Column 2</h2>
-    <p>Some text..</p>
-  </div>
-</div>
+</table>
 
 
 
-
-<div class="item-container row">
-  <div class="col">
-    <table class="table table-bordered table-striped table-hover w-35">
-      <thead>
-      <tr>
-        <th>id</th>
-        <th>description</th>
-        <th>buyer</th>
-        <th>seller</th>
-        <th>token</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let transaction of tokenTransactions">
-        <td>{{ transaction.id }}</td>
-        <td>{{ transaction.description }}</td>
-        <td>{{ transaction.buyer.displayName }}</td>
-        <td>{{ transaction.seller.displayName }}</td>
-        <td>{{ transaction.token.name }}</td>
-
-      </tr>
-    </tbody>
-    </table>
-  </div>
-  <div class="row bid-table">
-    <table class="table table-bordered table-striped table-hover">
-      <thead>
-      <tr>
-        <th>id</th>
-        <th>description</th>
-
-
-        <th>buyer</th>
-        <th>seller</th>
-        <th>token</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let bid of bids">
-        <td><h1>Token name:</h1>{{ bid.token.name }}</td>
-        <td>{{ bid.description }}</td>
-        <td>{{ bid.buyer }}</td>
-        <td>{{ bid.seller }}</td>
-        <td>{{ bid.token }}</td>
-        <td>{{ bid.transaction }}</td>
-
-      </tr>
-    </tbody>
-    </table>
-  </div>
-  <div class="row token">
-    <div class="card w-50">
-            <div id="tokenDetails" *ngIf="selected">
-
-              <p>{{ selected.id }}</p>
-              <p>Token: {{ selected.name }}</p>
-              <p>Description: {{ selected.description }}</p>
-              <p>Rarity: {{ selected.rarity }}</p>
-              <p>Price: {{ selected.price }}</p>
-              <p>Token Location: {{ selected.tokenLocation }}</p>
-              <p>Offered: {{ selected.offered }}</p>
-              <a class="actionLink" routerLink='/bid' >Bid Now</a>
-              <a class="actionLink" routerLink='/buy' [routerLinkActive]="['active', 'btn-primary']">Buy Now</a>
-      </div>
-    </div>
-  </div>
-</div>
-<!--
 <h1>BIDS TABLE</h1>
 <table class="table table-bordered table-striped table-hover">
   <thead>
   <tr>
     <th>id</th>
     <th>description</th>
+    <!-- description:string;
+    buyer: User;
+    seller: User;
+    token: Token; -->
 
 
     <th>buyer</th>
@@ -221,7 +94,7 @@
 </thead>
 <tbody>
   <tr *ngFor="let bid of bids">
-    <td><h1>Token name:</h1>{{ bid.token.name }}</td>
+    <td>{{ bid.id }}</td>
     <td>{{ bid.description }}</td>
     <td>{{ bid.buyer }}</td>
     <td>{{ bid.seller }}</td>
@@ -230,20 +103,5 @@
 
   </tr>
 </tbody>
-<<<<<<< HEAD
 </table>
-</div>
-</div>
-=======
-</table> -->
-<!--
-<div id="tokenDetails" *ngIf="selected">
-  <p>{{ selected.id }}</p>
-  <p>Token: {{ selected.name }}</p>
-  <p>Description: {{ selected.description }}</p>
-  <p>Rarity: {{ selected.rarity }}</p>
-  <p>Price: {{ selected.price }}</p>
-  <p>Token Location: {{ selected.tokenLocation }}</p>
-  <p>Offered: {{ selected.offered }}</p>
-</div> -->
->>>>>>> e442e73a0e7bd36ffb88537f7b019888729117d0
+
